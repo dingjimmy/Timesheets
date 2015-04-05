@@ -4,35 +4,35 @@ using Timesheets.Data;
 
 namespace Timesheets.WinClient
 {
-    public class RootViewModel : PropertyChangedBase
+    public class RootViewModel
     {
-        string name;
 
-        public string Name
+        public bool CanSayHello(string givenName, string familyName)
         {
-            get { return name; }
-            set
-            {
-                name = value;
-                NotifyOfPropertyChange(() => Name);
-                NotifyOfPropertyChange(() => CanSayHello);
-            }
+            return !string.IsNullOrWhiteSpace(givenName) && !string.IsNullOrWhiteSpace(familyName);
         }
 
-        public bool CanSayHello
+
+        public void SayHello(string givenName, string familyName)
         {
-            get { return !string.IsNullOrWhiteSpace(Name); }
+            MessageBox.Show($"Hello {givenName} {familyName}!");
         }
 
+
+        public bool CanSayGoodby(string givenName, string familyName)
+        {
+            return !string.IsNullOrWhiteSpace(givenName) && !string.IsNullOrWhiteSpace(familyName);
+        }
+
+        public void SayGoodby(string givenName, string familyName)
+        {
+            MessageBox.Show($"Goodby {givenName} {familyName}. :(");
+        }
 
         public RootViewModel(ITimesheetDbContext dbContext)
         {
             var ctx = dbContext;
         }
 
-        public void SayHello()
-        {
-            MessageBox.Show(string.Format("Hello {0}!", Name)); //Don't do this in real life :)
-        }
     }
 }
