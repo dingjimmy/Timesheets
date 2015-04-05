@@ -5,14 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Timesheets.WinClient"
              mc:Ignorable="d" 
-             Width="300"
-             Height="300">
-    <Grid Background="Azure">
+             Width="400"
+             Height="500">
+    <Grid>
         <StackPanel>
-            <TextBox Name="GivenName" Margin="5" />
-            <TextBox Name="FamilyName" Margin="5" />
-            <Button Name="SayHello" Margin="5" >Say Hello</Button>
-            <Button Name="SayGoodby" Margin="5">Say Goodby</Button>
+            <ListBox ItemsSource="{Binding Timesheets}" SelectedValue="{Binding SelectedTimesheet}" />
+            <Button Name="AmendTimesheet" Margin="5">Amend</Button>
+            <Button Name="CreateTimesheet" Margin="5">New</Button>
         </StackPanel>            
     </Grid>
 </UserControl>

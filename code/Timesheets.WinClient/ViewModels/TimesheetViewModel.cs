@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timesheets.WinClient.ViewModels
+namespace Timesheets.WinClient
 {
-    class TimesheetViewModel
+    public class TimesheetViewModel
     {
     }
 }
