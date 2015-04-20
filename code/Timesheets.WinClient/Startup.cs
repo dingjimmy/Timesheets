@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace Timesheets.WinClient
 {
-    public class Bootstrapper : BootstrapperBase
+    public class Startup : BootstrapperBase
     {
         private IKernel kernel;
 
-        public Bootstrapper()
+        public Startup()
         {
             Initialize();
         }
@@ -23,7 +23,7 @@ namespace Timesheets.WinClient
             this.kernel.Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
             this.kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             this.kernel.Bind<ITimesheetDbContext>().To<TimesheetDbContext>();
-
+            
             base.Configure();
         }
 

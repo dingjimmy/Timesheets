@@ -9,8 +9,14 @@
              Height="500">
     <Grid>
         <StackPanel>
-            <ListBox ItemsSource="{Binding Timesheets}" SelectedValue="{Binding SelectedTimesheet}" />
-            <Button Name="AmendTimesheet" Margin="5">Amend</Button>
+            <ListBox ItemsSource="{Binding Timesheets}" SelectedValue="{Binding SelectedTimesheet}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>FooBar</TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Name="ViewOrAmendTimesheet" Margin="5">Amend</Button>
             <Button Name="CreateTimesheet" Margin="5">New</Button>
         </StackPanel>            
     </Grid>

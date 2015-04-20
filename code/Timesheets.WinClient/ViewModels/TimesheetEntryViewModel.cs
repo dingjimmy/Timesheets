@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Timesheets.WinClient
 {
-    class TimesheetEntryViewModel
+    public class TimesheetEntryViewModel
     {
+        public int ID { get; set; }
+
+        public DateTime StartedOn { get; set; }
+
+        public DateTime CompletedOn { get; set; }
+
+        public string Description { get; set; }
     }
 }

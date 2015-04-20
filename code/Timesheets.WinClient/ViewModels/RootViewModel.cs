@@ -1,19 +1,22 @@
 ﻿using Caliburn.Micro;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using Timesheets.Data;
 
 namespace Timesheets.WinClient
 {
-    public class RootViewModel : PropertyChangedBase
+    public class RootViewModel : Conductor<TimesheetViewModel>
     {
-        #region Fields
 
-        private ITimesheetDbContext DbContext;
+#region Fields
 
-        #endregion
+        private ITimesheetDbContext dbContext;
+        private IWindowManager winManager;
 
-        #region Data
+#endregion
+        
+#region Data
 
         public BindableCollection<TimesheetViewModel> Timesheets { get; set; }
 
@@ -26,35 +29,42 @@ namespace Timesheets.WinClient
             {
                 this.selectedTimesheet = value;
                 NotifyOfPropertyChange(() => SelectedTimesheet);
-                NotifyOfPropertyChange(() => CanAmendTimesheet);
+                NotifyOfPropertyChange(() => CanViewOrAmendTimesheet);
             }
         }
         private TimesheetViewModel selectedTimesheet;
 
-        #endregion
+#endregion
 
-        #region Constructors
+#region Constructors
 
-        public RootViewModel(ITimesheetDbContext dbContext)
+        public RootViewModel(ITimesheetDbContext dbCtx, IWindowManager winMgr)
         {
-            if (dbContext == null) throw new ArgumentNullException(nameof(dbContext));
-            this.DbContext = dbContext;
+            if (dbCtx == null) throw new ArgumentNullException(nameof(dbCtx));
+            if (winMgr == null) throw new ArgumentNullException(nameof(winMgr));
 
-            this.Timesheets = new BindableCollection<TimesheetViewModel>()
+            this.dbContext = dbCtx;
+            this.winManager = winMgr;
+
+            this.Timesheets = new BindableCollection<TimesheetViewModel>();
+
+            var vms = new List<TimesheetViewModel>();
+
+            foreach (var ts in dbContext.Timesheets)
             {
-                new TimesheetViewModel(),
-                new TimesheetViewModel(),
-                new TimesheetViewModel()
-            };
+              vms.Add(ts.AsViewModel());             
+            }
+
+            this.Timesheets.AddRange(vms);
         }
 
-        #endregion
+#endregion
 
-        #region Actions
+#region Actions
 
         public void CreateTimesheet()
         {
-
+            this.winManager.ShowWindow(new TimesheetViewModel());
         }
 
         public bool CanCreateTimesheet
@@ -65,12 +75,12 @@ namespace Timesheets.WinClient
             }
         }
 
-        public void AmendTimesheet()
+        public void ViewOrAmendTimesheet()
         {
-
+            this.winManager.ShowWindow(this.selectedTimesheet);
         }
 
-        public bool CanAmendTimesheet
+        public bool CanViewOrAmendTimesheet
         {
             get
             {
@@ -78,35 +88,7 @@ namespace Timesheets.WinClient
             }
         }
 
-        #endregion
-
-        #region Demo Stuff
-
-
-        public bool CanSayHello(string givenName, string familyName)
-        {
-            return !string.IsNullOrWhiteSpace(givenName) && !string.IsNullOrWhiteSpace(familyName);
-        }
-
-
-        public void SayHello(string givenName, string familyName)
-        {
-            MessageBox.Show($"Hello {givenName} {familyName}!");
-        }
-
-
-        public bool CanSayGoodby(string givenName, string familyName)
-        {
-            return !string.IsNullOrWhiteSpace(givenName) && !string.IsNullOrWhiteSpace(familyName);
-        }
-
-        public void SayGoodby(string givenName, string familyName)
-        {
-            MessageBox.Show($"Goodby {givenName} {familyName}. :(");
-        }
-
-
-        #endregion
+#endregion
 
     }
 }
