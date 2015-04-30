@@ -48,14 +48,10 @@ namespace Timesheets.WinClient
 
             this.Timesheets = new BindableCollection<TimesheetViewModel>();
 
-            var vms = new List<TimesheetViewModel>();
-
             foreach (var ts in dbContext.Timesheets)
             {
-              vms.Add(ts.AsViewModel());             
+                this.Timesheets.Add(ts.AsViewModel());           
             }
-
-            this.Timesheets.AddRange(vms);
         }
 
 #endregion
