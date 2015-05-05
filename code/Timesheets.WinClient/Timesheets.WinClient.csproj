@@ -114,9 +114,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions\TimesheetExtensions.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\TimesheetSummaryViewModel.cs" />
     <Compile Include="ViewModels\RootViewModel.cs" />
     <Compile Include="ViewModels\TimesheetEntryViewModel.cs" />
+    <Compile Include="ViewModels\EditTimesheetViewModel.cs" />
     <Compile Include="ViewModels\TimesheetViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -161,6 +164,10 @@
     <Page Include="Views\RootView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditTimesheetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TimesheetView.xaml">
       <SubType>Designer</SubType>

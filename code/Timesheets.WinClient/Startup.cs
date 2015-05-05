@@ -30,8 +30,14 @@ namespace Timesheets.WinClient
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<RootViewModel>();
+            var settings = new Dictionary<string, object>
+            {
+                { "SizeToContent", SizeToContent.Manual },
+                { "Height" , 600  },
+                { "Width"  , 800 },
+            };
 
+            DisplayRootViewFor<RootViewModel>(settings);
         }
 
         protected override object GetInstance(Type service, string key)

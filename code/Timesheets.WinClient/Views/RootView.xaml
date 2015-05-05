@@ -5,19 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Timesheets.WinClient"
              mc:Ignorable="d" 
-             Width="400"
-             Height="500">
+             d:DesignWidth="800"
+             d:DesignHeight="600">
+    
     <Grid>
-        <StackPanel>
-            <ListBox ItemsSource="{Binding Timesheets}" SelectedValue="{Binding SelectedTimesheet}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="550*" />
+        </Grid.ColumnDefinitions>
+        
+        <DockPanel Grid.Column="0" Background="GreenYellow">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Button Name="ViewSettings" Width="40" Height="40">Settings</Button>
+                <Grid Width="130" Height="40" ><!--Padding--></Grid>
+                <Button Name="ViewTimesheet" Width="40" Height="40">View</Button>
+                <Button Name="CreateTimesheet" Width="40" Height="40">New</Button>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding Timesheets}" SelectedValue="{Binding SelectedTimesheet}" DockPanel.Dock="Top">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>FooBar</TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
-            <Button Name="ViewOrAmendTimesheet" Margin="5">Amend</Button>
-            <Button Name="CreateTimesheet" Margin="5">New</Button>
-        </StackPanel>            
+            </ListBox>        
+        </DockPanel>     
+        
+        <ContentControl Grid.Column="1" Name="ActiveItem" /> 
+       
     </Grid>
 </UserControl>

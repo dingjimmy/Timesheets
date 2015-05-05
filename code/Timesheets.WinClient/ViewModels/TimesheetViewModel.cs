@@ -22,23 +22,53 @@ namespace Timesheets.WinClient
         public DateTime PeriodEnds { get; set; }
 
         public ICollection<TimesheetEntryViewModel> Entries { get; set; }
-    }
 
-    public static class TimesheetExtenstions
-    {
-        public static TimesheetViewModel AsViewModel(this Timesheet ts)
+
+        #region Constructors
+
+        public TimesheetViewModel()
         {
-            var vm = new TimesheetViewModel()
-            {
-                ID = ts.ID,
-                Name = ts.Name,
-                Employee = ts.Employee,
-                Customer = ts.Customer,
-                PeriodStarts = ts.PeriodStarts,
-                PeriodEnds = ts.PeriodEnds
-            };
-
-            return vm;
+            
         }
+
+        #endregion
+
+
+        #region Action Methods
+
+
+        public void AddEntry()
+        {
+            System.Windows.MessageBox.Show("Add an Entry");
+        }
+
+        public bool CanAddEntry{ get; set; }
+
+
+        public void RemoveEntry()
+        {
+            System.Windows.MessageBox.Show("Remove an Entry");
+        }
+
+        public bool CanRemoveEntry { get; set; }
+
+
+        public void Print()
+        {
+            System.Windows.MessageBox.Show("Print Timesheet");
+        }
+
+        public bool CanPrint { get; set; }
+
+
+        public void Edit()
+        {
+            System.Windows.MessageBox.Show("Edit Timesheet");
+        }
+
+        public bool CanEdit { get; set; }
+
+
+        #endregion
     }
 }

@@ -1,26 +1,18 @@
-﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System;
+using Caliburn.Micro;
 using Timesheets.Data;
 
 namespace Timesheets.WinClient
 {
-    public class RootViewModel : Conductor<TimesheetViewModel>
-    {
-
-#region Fields
-
+    public class RootViewModel : Conductor<TimesheetSummaryViewModel>
+    { 
         private ITimesheetDbContext dbContext;
         private IWindowManager winManager;
+        private TimesheetSummaryViewModel selectedTimesheet;
 
-#endregion
-        
-#region Data
+        public BindableCollection<TimesheetSummaryViewModel> Timesheets { get; set; }
 
-        public BindableCollection<TimesheetViewModel> Timesheets { get; set; }
-
-        public TimesheetViewModel SelectedTimesheet {
+        public TimesheetSummaryViewModel SelectedTimesheet {
             get
             {
                 return selectedTimesheet;
@@ -29,15 +21,10 @@ namespace Timesheets.WinClient
             {
                 this.selectedTimesheet = value;
                 NotifyOfPropertyChange(() => SelectedTimesheet);
-                NotifyOfPropertyChange(() => CanViewOrAmendTimesheet);
+                NotifyOfPropertyChange(() => CanViewTimesheet);
             }
         }
-        private TimesheetViewModel selectedTimesheet;
-
-#endregion
-
-#region Constructors
-
+        
         public RootViewModel(ITimesheetDbContext dbCtx, IWindowManager winMgr)
         {
             if (dbCtx == null) throw new ArgumentNullException(nameof(dbCtx));
@@ -46,21 +33,23 @@ namespace Timesheets.WinClient
             this.dbContext = dbCtx;
             this.winManager = winMgr;
 
-            this.Timesheets = new BindableCollection<TimesheetViewModel>();
+            this.Timesheets = new BindableCollection<TimesheetSummaryViewModel>();
 
             foreach (var ts in dbContext.Timesheets)
             {
-                this.Timesheets.Add(ts.AsViewModel());           
+                this.Timesheets.Add(ts.AsSummaryViewModel());           
             }
         }
 
-#endregion
-
-#region Actions
-
         public void CreateTimesheet()
         {
-            this.winManager.ShowWindow(new TimesheetViewModel());
+            this.ActivateItem(new EditTimesheetViewModel(dbContext)
+            {
+                Name = "New Timesheet",
+                Customer = "A Customer",
+                PeriodStarts = DateTime.Today,
+                PeriodEnds = DateTime.Today.AddMonths(1)
+            } );
         }
 
         public bool CanCreateTimesheet
@@ -71,20 +60,18 @@ namespace Timesheets.WinClient
             }
         }
 
-        public void ViewOrAmendTimesheet()
+        public void ViewTimesheet()
         {
             this.winManager.ShowWindow(this.selectedTimesheet);
         }
 
-        public bool CanViewOrAmendTimesheet
+        public bool CanViewTimesheet
         {
             get
             {
                 return this.selectedTimesheet != null;
             }
         }
-
-#endregion
 
     }
 }
