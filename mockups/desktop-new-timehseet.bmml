@@ -1,0 +1,219 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1178" measuredH="692" mockupW="1103" mockupH="647">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="75" y="45" w="1103" h="647" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bottomheight>0</bottomheight>
+        <close>true</close>
+        <maximizeRestore>true</maximizeRestore>
+        <minimize>true</minimize>
+        <text>Timesheets</text>
+        <topheight>28</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Canvas" x="75" y="70" w="294" h="42" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="75" y="70" w="47" h="42" measuredW="38" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ListIcon%7Cxsmall</icon>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Canvas" x="366" y="109" w="812" h="583" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::TextInput" x="398" y="125" w="748" h="-1" measuredW="141" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>New%20Timesheet</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::TextInput" x="481" y="210" w="140" h="-1" measuredW="86" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>27/03/2015</text>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Label" x="399" y="211" w="75" h="-1" measuredW="40" measuredH="24" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>right</align>
+        <size>16</size>
+        <text>From%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::TextInput" x="481" y="245" w="140" h="-1" measuredW="88" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>24/04/2015</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::Label" x="398" y="246" w="76" h="-1" measuredW="40" measuredH="24" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>right</align>
+        <size>16</size>
+        <text>Untill%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::TextInput" x="481" y="172" w="665" h="-1" measuredW="73" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Customer</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Label" x="398" y="173" w="76" h="-1" measuredW="75" measuredH="24" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>right</align>
+        <size>16</size>
+        <text>Customer%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="__group__" x="76" y="109" w="293" h="58" measuredW="293" measuredH="58" zOrder="12" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="293" h="58" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="38">
+          <controlProperties>
+            <color>13421772</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="9" y="10" w="133" h="-1" measuredW="133" measuredH="21" zOrder="1" locked="false" isInGroup="38">
+          <controlProperties>
+            <bold>true</bold>
+            <size>18</size>
+            <text>New%20Timehseet</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="9" y="29" w="110" h="-1" measuredW="110" measuredH="21" zOrder="2" locked="false" isInGroup="38">
+          <controlProperties>
+            <color>2848996</color>
+            <text>0%20Hours%2C%200%20Minutes</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="157" y="29" w="128" h="-1" measuredW="59" measuredH="21" zOrder="3" locked="false" isInGroup="38">
+          <controlProperties>
+            <align>right</align>
+            <color>6710886</color>
+            <text>Customer</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Button" x="1133" y="70" w="45" h="42" measuredW="38" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>%24ACCOUNT/assets/icon_delete.png%7Cxsmall</icon>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Button" x="1092" y="70" w="45" h="42" measuredW="38" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>%24ACCOUNT/assets/icon_save.png%7Cxsmall</icon>
+        <menuIcon>false</menuIcon>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Button" x="282" y="70" w="45" h="42" measuredW="38" measuredH="27" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>PencilIcon%7Cxsmall</icon>
+        <menuIcon>false</menuIcon>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Button" x="324" y="70" w="45" h="42" measuredW="38" measuredH="27" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>%24ACCOUNT/assets/icon_add.png%7Cxsmall</icon>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="__group__" x="75" y="164" w="293" h="58" measuredW="293" measuredH="58" zOrder="13" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="293" h="58" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="45"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="9" y="10" w="276" h="-1" measuredW="183" measuredH="21" zOrder="1" locked="false" isInGroup="45">
+          <controlProperties>
+            <bold>true</bold>
+            <size>18</size>
+            <text>March%202015%20Overtime</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="9" y="29" w="133" h="-1" measuredW="126" measuredH="21" zOrder="2" locked="false" isInGroup="45">
+          <controlProperties>
+            <color>2848996</color>
+            <text>23%20Hours%2C%2030%20Minutes</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="157" y="29" w="128" h="-1" measuredW="47" measuredH="21" zOrder="3" locked="false" isInGroup="45">
+          <controlProperties>
+            <align>right</align>
+            <color>6710886</color>
+            <text>Eyeplan</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="46" controlTypeID="__group__" x="75" y="219" w="293" h="58" measuredW="293" measuredH="58" zOrder="14" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="293" h="58" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="46"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="9" y="10" w="276" h="-1" measuredW="208" measuredH="21" zOrder="1" locked="false" isInGroup="46">
+          <controlProperties>
+            <bold>true</bold>
+            <size>18</size>
+            <text>February%202015%20Overtime</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="9" y="29" w="153" h="-1" measuredW="126" measuredH="21" zOrder="2" locked="false" isInGroup="46">
+          <controlProperties>
+            <color>2848996</color>
+            <text>23%20Hours%2C%2030%20Minutes</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="157" y="29" w="128" h="-1" measuredW="47" measuredH="21" zOrder="3" locked="false" isInGroup="46">
+          <controlProperties>
+            <align>right</align>
+            <color>6710886</color>
+            <text>Eyeplan</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="47" controlTypeID="__group__" x="75" y="274" w="293" h="58" measuredW="293" measuredH="58" zOrder="15" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="293" h="58" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="47"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="9" y="10" w="276" h="-1" measuredW="199" measuredH="21" zOrder="1" locked="false" isInGroup="47">
+          <controlProperties>
+            <bold>true</bold>
+            <size>18</size>
+            <text>January%202015%20Overtime</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="9" y="29" w="140" h="-1" measuredW="126" measuredH="21" zOrder="2" locked="false" isInGroup="47">
+          <controlProperties>
+            <color>2848996</color>
+            <text>23%20Hours%2C%2030%20Minutes</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="157" y="29" w="128" h="-1" measuredW="47" measuredH="21" zOrder="3" locked="false" isInGroup="47">
+          <controlProperties>
+            <align>right</align>
+            <color>6710886</color>
+            <text>Eyeplan</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="48" controlTypeID="__group__" x="75" y="329" w="293" h="58" measuredW="293" measuredH="58" zOrder="16" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="293" h="58" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="48"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="9" y="10" w="276" h="-1" measuredW="223" measuredH="21" zOrder="1" locked="false" isInGroup="48">
+          <controlProperties>
+            <bold>true</bold>
+            <size>18</size>
+            <text>December%202014%20Overtime</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="9" y="29" w="133" h="-1" measuredW="126" measuredH="21" zOrder="2" locked="false" isInGroup="48">
+          <controlProperties>
+            <color>2848996</color>
+            <text>23%20Hours%2C%2030%20Minutes</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="157" y="29" w="128" h="-1" measuredW="47" measuredH="21" zOrder="3" locked="false" isInGroup="48">
+          <controlProperties>
+            <align>right</align>
+            <color>6710886</color>
+            <text>Eyeplan</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
