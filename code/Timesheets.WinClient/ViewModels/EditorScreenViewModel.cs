@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using Caliburn.Micro;
 using Timesheets.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Timesheets.WinClient
 {
-    public class EditTimesheetViewModel
+    public class EditorScreenViewModel : Screen
     {
         public int ID { get; set; }
 
@@ -22,8 +19,20 @@ namespace Timesheets.WinClient
 
         #region Constructors
 
-        public EditTimesheetViewModel(ITimesheetDbContext dbContext)
+        public EditorScreenViewModel()
         {
+            CanSave = true;
+            CanRemove = true;
+        }
+
+        public EditorScreenViewModel(Timesheet model)
+        {
+            this.ID = model.ID;
+            this.Name = model.Name;
+            this.Customer = model.Customer;
+            this.PeriodStarts = model.PeriodStarts;
+            this.PeriodEnds = model.PeriodEnds;
+
             CanSave = true;
             CanRemove = true;
         }
@@ -36,7 +45,7 @@ namespace Timesheets.WinClient
 
         public void Save()
         {
-            //System.Windows.MessageBox.Show("Save Timesheet");
+            
         }
 
         public bool CanSave { get; set; }

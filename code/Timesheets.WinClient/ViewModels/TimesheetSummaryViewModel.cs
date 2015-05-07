@@ -1,8 +1,12 @@
-﻿using Timesheets.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Caliburn.Micro;
+using Timesheets.Data;
 
 namespace Timesheets.WinClient
 {
-    public class TimesheetSummaryViewModel
+    public class TimesheetSummaryViewModel : PropertyChangedBase
     {
         public int ID { get; set; }
 
@@ -21,11 +25,34 @@ namespace Timesheets.WinClient
         {
         }
 
+        public TimesheetSummaryViewModel(Timesheet model)
+        {
+            var duration = TotalDuration(model.Entries);
+
+            this.ID = model.ID;
+            this.Name = model.Name;
+            this.Customer = model.Customer;
+            this.Hours = duration.Hours;
+            this.Minutes = duration.Minutes;
+        }
+
         #endregion
 
 
-        #region Action Methods
+        #region Helper Methods
 
+        private TimeSpan TotalDuration(IEnumerable<TimesheetEntry> entries)
+        {
+            var total = new TimeSpan();
+
+            foreach (var entry in entries)
+            {
+                var duration = entry.CompletedOn.Subtract(entry.StartedOn);
+                total += duration;
+            }
+
+            return total;
+        }
 
         #endregion
     }

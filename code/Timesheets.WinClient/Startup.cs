@@ -37,7 +37,7 @@ namespace Timesheets.WinClient
                 { "Width"  , 800 },
             };
 
-            DisplayRootViewFor<RootViewModel>(settings);
+            DisplayRootViewFor<ShellViewModel>(settings);
         }
 
         protected override object GetInstance(Type service, string key)
