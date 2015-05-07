@@ -18,6 +18,11 @@ namespace Timesheets.Data
         public DateTime PeriodEnds { get; set; }
 
         public ICollection<TimesheetEntry> Entries { get; set; }
+
+        public Timesheet()
+        {
+            this.Entries = new List<TimesheetEntry>();
+        }
         
     }
 }

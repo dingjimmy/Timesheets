@@ -16,7 +16,7 @@ namespace Timesheets.Data
     public class FakeDbSet<T> : IDbSet<T> where T : class
     {
 
-        private ObservableCollection<T> data;
+        protected ObservableCollection<T> data;
         private IQueryable query;
 
         public FakeDbSet()
@@ -47,7 +47,7 @@ namespace Timesheets.Data
             return Activator.CreateInstance<T>();
         }
 
-        public T Find(params object[] keyValues)
+        public virtual T Find(params object[] keyValues)
         {
             throw new NotImplementedException("Derive from FakeDbSet<T> and override Find");
         }

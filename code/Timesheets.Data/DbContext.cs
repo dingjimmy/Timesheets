@@ -25,37 +25,88 @@ namespace Timesheets.Data
         public IDbSet<Timesheet> Timesheets { get; set; }
 
         public IDbSet<TimesheetEntry> Entries { get; set; }
+
     }
 
+    public class TimesheetDbSet : FakeDbSet<Timesheet>
+    {
+        public override Timesheet Find(params object[] keyValues)
+        {
+            if (keyValues != null && keyValues.Any())
+            {
+                return this.data.SingleOrDefault(ts => (int)keyValues[0] == ts.ID);
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    public class TimesheetEntryDbSet : FakeDbSet<TimesheetEntry>
+    {
+        public override TimesheetEntry Find(params object[] keyValues)
+        {
+            if (keyValues != null && keyValues.Any())
+            {
+                return this.data.SingleOrDefault(entry => (int)keyValues[0] == entry.ID);
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
 
     public class FakeTimehsheetDbContext : ITimesheetDbContext
     {
-        private FakeDbSet<TimesheetEntry> entries;
-        private FakeDbSet<Timesheet> timesheets;
+        private Random rng = new Random();
+
+        private TimesheetEntryDbSet entries;
+        private TimesheetDbSet timesheets;
         
 
         public IDbSet<TimesheetEntry> Entries
         {
             get { return this.entries; }
-            set { this.entries = (FakeDbSet<TimesheetEntry>)value; }
+            set { this.entries = (TimesheetEntryDbSet)value; }
         }
 
         public IDbSet<Timesheet> Timesheets
         {
             get { return this.timesheets; }
-            set { this.timesheets = (FakeDbSet<Timesheet>)value; }
+            set { this.timesheets = (TimesheetDbSet)value; }
         }
 
         public FakeTimehsheetDbContext()
         {
-            this.timesheets = new FakeDbSet<Timesheet>();
-            this.entries = new FakeDbSet<TimesheetEntry>();
+            this.timesheets = new TimesheetDbSet();
+            this.entries = new TimesheetEntryDbSet();
         }
 
         public int SaveChanges()
         {
-            // do nothing for now. 
-            return 0;
+            var changes = 0;
+
+            foreach (var item in Timesheets)
+            {
+                if (item.ID == 0)
+                {
+                    item.ID = rng.Next();
+                    changes++;
+                }
+            }
+
+            foreach (var item in Entries)
+            {
+                if (item.ID == 0)
+                {
+                    item.ID = rng.Next();
+                    changes++;
+                }
+            }
+
+            return changes;
         }
 
         #region IDisposable Support
