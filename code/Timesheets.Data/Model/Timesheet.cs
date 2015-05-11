@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Timesheets.Data
+namespace Timesheets.Data.Model
 {
     public class Timesheet
     {

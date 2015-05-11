@@ -8,9 +8,9 @@ namespace Timesheets.WinClient
 
     public interface ITimesheetList : IScreen
     {
-        BindableCollection<TimesheetSummaryViewModel> Timesheets { get; set; }
+        BindableCollection<TimesheetViewModel> Timesheets { get; set; }
 
-        TimesheetSummaryViewModel SelectedTimesheet { get; set; }
+        TimesheetViewModel SelectedTimesheet { get; set; }
 
     }
 
@@ -18,11 +18,11 @@ namespace Timesheets.WinClient
     {
         private ITimesheetDbContext data;
         private IEventAggregator messages;
-        private TimesheetSummaryViewModel selectedTimesheet;
+        private TimesheetViewModel selectedTimesheet;
 
-        public BindableCollection<TimesheetSummaryViewModel> Timesheets { get; set; }
+        public BindableCollection<TimesheetViewModel> Timesheets { get; set; }
 
-        public TimesheetSummaryViewModel SelectedTimesheet
+        public TimesheetViewModel SelectedTimesheet
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Timesheets.WinClient
             this.data = data;
             this.messages = msgs;
 
-            this.Timesheets = new BindableCollection<TimesheetSummaryViewModel>();
+            this.Timesheets = new BindableCollection<TimesheetViewModel>();
 
         }
 

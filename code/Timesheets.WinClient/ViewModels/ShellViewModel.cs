@@ -36,23 +36,21 @@ namespace Timesheets.WinClient
         public void Handle(AddTimesheetMessage message)
         {
             var ts = CreateBlankTimesheet();
+            var vm = new TimesheetViewModel(ts);
 
-            this.TimesheetList.Timesheets.Add(new TimesheetSummaryViewModel(ts));
+            this.TimesheetList.Timesheets.Add(vm);
 
-            ActivateItem(new EditorScreenViewModel(ts));
+            ActivateItem(vm);
         }
 
         public void Handle(SelectTimesheetMessage message)
         {
-            var ts = this.data.Timesheets.Find(message.TimesheetID);
-
-            //ActivateItem(new DetailScreenViewModel(ts));
-            ActivateItem(new EditorScreenViewModel(ts));
+            ActivateItem(this.TimesheetList.SelectedTimesheet);           
         }
 
-        public Timesheet CreateBlankTimesheet()
+        public Data.Model.Timesheet CreateBlankTimesheet()
         {
-            var ts = new Timesheet()
+            var ts = new Data.Model.Timesheet()
             {
                 Name = "New Timesheet",
                 Customer = "A Customer",

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Timesheets.Data
+namespace Timesheets.Data.Model
 {
     public class TimesheetEntry
     {

@@ -29,7 +29,7 @@
             <ListBox Name="Timesheets" cal:Message.Attach="[SelectionChanged]=[SelectTimesheet]" DockPanel.Dock="Top" Style="{DynamicResource TimesheetListStyle}" ItemContainerStyle="{DynamicResource TimesheetListItemStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <ContentControl cal:View.Model="{Binding}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" IsTabStop="False" />
+                        <ContentControl cal:View.Model="{Binding}" cal:View.Context="Summary" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" IsTabStop="False" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

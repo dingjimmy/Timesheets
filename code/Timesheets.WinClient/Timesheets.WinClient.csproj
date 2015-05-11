@@ -119,11 +119,9 @@
     <Compile Include="Messages\SelectTimesheetMessage.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\TimesheetListViewModel.cs" />
-    <Compile Include="ViewModels\TimesheetSummaryViewModel.cs" />
+    <Compile Include="ViewModels\TimesheetViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\TimeEntryViewModel.cs" />
-    <Compile Include="ViewModels\EditorScreenViewModel.cs" />
-    <Compile Include="ViewModels\DetailScreenViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -172,11 +170,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditorScreenView.xaml">
+    <Page Include="Views\Timesheet\TimesheetView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\DetaiScreenView.xaml">
+    <Page Include="Views\Timesheet\Detail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,7 +182,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TimesheetSummaryView.xaml">
+    <Page Include="Views\Timesheet\Summary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
