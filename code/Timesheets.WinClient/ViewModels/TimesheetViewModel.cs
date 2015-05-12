@@ -8,36 +8,105 @@ namespace Timesheets.WinClient
 {
     public class TimesheetViewModel : Screen
     {
-        public int ID { get; set; }
+        #region Data Properties 
 
-        public string Name { get; set; }
+        public int ID
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                NotifyOfPropertyChange(() => ID);
+            }
+        }
+        private int id;
 
-        public string Customer { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                NotifyOfPropertyChange(() => Name);
+            }
+        }
+        private string name;
 
-        public DateTime PeriodStarts { get; set; }
+        public string Customer
+        {
+            get { return customer; }
+            set
+            {
+                customer = value;
+                NotifyOfPropertyChange(() => Customer);
+            }
+        }
+        private string customer;
 
-        public DateTime PeriodEnds { get; set; }
+        public DateTime PeriodStarts
+        {
+            get { return starts; }
+            set
+            {
+                starts = value;
+                NotifyOfPropertyChange(() => PeriodStarts);
+            }
+        }
+        private DateTime starts;
+     
+        public DateTime PeriodEnds
+        {
+            get { return ends; }
+            set
+            {
+                ends = value;
+                NotifyOfPropertyChange(() => PeriodEnds);
+            }
+        }   
+        private DateTime ends;
 
-        public int Hours { get; set; }
+        public int Hours
+        {
+            get { return hours; }
+            set
+            {
+                hours = value;
+                NotifyOfPropertyChange(() => Hours);
+            }
+        }
+        private int hours;
 
-        public int  Minutes { get; set; }
+        public int Minutes
+        {
+            get { return minutes; }
+            set
+            {
+                minutes = value;
+                NotifyOfPropertyChange(() => Minutes);
+            }
+        }
+        private int minutes;
 
-        public bool CanSave { get; set; }
+        #endregion
 
-        public bool CanRemove { get; set; }
 
-        //        public bool CanAddEntry{ get; set; }
-        //        public bool CanRemoveEntry { get; set; }
-        //        public bool CanPrint { get; set; }
-        //        public bool CanEdit { get; set; }
+        #region Guard Properties
+
+        // public bool CanSave { get; set; }
+        // public bool CanRemove { get; set; }
+        // public bool CanAddEntry{ get; set; }
+        // public bool CanRemoveEntry { get; set; }
+        // public bool CanPrint { get; set; }
+        // public bool CanEdit { get; set; }
+
+        #endregion
 
 
         #region Constructors
 
         public TimesheetViewModel()
         {
-            CanSave = true;
-            CanRemove = true;
+
         }
 
         public TimesheetViewModel(Data.Model.Timesheet model)
@@ -53,8 +122,6 @@ namespace Timesheets.WinClient
             this.Hours = duration.Hours;
             this.Minutes = duration.Minutes;
 
-            CanSave = true;
-            CanRemove = true;
         }
 
         #endregion
