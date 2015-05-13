@@ -5,7 +5,6 @@ using Timesheets.WinClient.Messages;
 
 namespace Timesheets.WinClient
 {
-
     public interface ITimesheetList : IScreen
     {
         BindableCollection<TimesheetViewModel> Timesheets { get; set; }
@@ -39,6 +38,7 @@ namespace Timesheets.WinClient
         public TimesheetListViewModel(ITimesheetDbContext data, IEventAggregator msgs)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
+            if (msgs == null) throw new ArgumentNullException(nameof(msgs));
 
             this.data = data;
             this.messages = msgs;

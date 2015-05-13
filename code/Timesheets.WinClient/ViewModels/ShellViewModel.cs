@@ -6,7 +6,7 @@ using Timesheets.WinClient.Messages;
 
 namespace Timesheets.WinClient
 {
-    public class ShellViewModel : Conductor<IScreen>, IHandle<AddTimesheetMessage>, IHandle<SelectTimesheetMessage>
+    public class ShellViewModel : Conductor<IScreen>, IHandle<AddTimesheetMessage>, IHandle<SelectTimesheetMessage>, IHandle<SaveTimesheetMessage>
     { 
         private ITimesheetDbContext data;
         private IWindowManager windows;
@@ -36,7 +36,13 @@ namespace Timesheets.WinClient
         public void Handle(AddTimesheetMessage message)
         {
             var ts = CreateBlankTimesheet();
-            var vm = new TimesheetViewModel(ts);
+            var vm = ninject.Get<TimesheetViewModel>();
+
+            vm.ID = ts.ID;
+            vm.Name = ts.Name;
+            vm.Customer = ts.Customer;
+            vm.PeriodStarts = ts.PeriodStarts;
+            vm.PeriodEnds = ts.PeriodEnds;
 
             this.TimesheetList.Timesheets.Add(vm);
 
@@ -46,6 +52,23 @@ namespace Timesheets.WinClient
         public void Handle(SelectTimesheetMessage message)
         {
             ActivateItem(this.TimesheetList.SelectedTimesheet);           
+        }
+
+        public void Handle(SaveTimesheetMessage message)
+        {
+            var vm = this.TimesheetList.SelectedTimesheet;
+            var ts = data.Timesheets.Find(vm.ID);
+
+            ts.Name = vm.Name;
+            ts.Customer = vm.Customer;
+            ts.PeriodStarts = vm.PeriodStarts;
+            ts.PeriodEnds = vm.PeriodEnds;
+
+            data.SaveChanges();
+
+            System.Windows.MessageBox.Show("{ts.Name} has been saved!");
+
+            ActivateItem(this.TimesheetList.SelectedTimesheet);
         }
 
         public Data.Model.Timesheet CreateBlankTimesheet()

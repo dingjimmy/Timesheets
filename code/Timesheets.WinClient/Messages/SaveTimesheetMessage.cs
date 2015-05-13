@@ -1,6 +1,6 @@
 ﻿namespace Timesheets.WinClient.Messages
 {
-    public class AddTimesheetMessage
+    public class SaveTimesheetMessage
     {
     }
 }

@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
 using Timesheets.Data;
+using Timesheets.WinClient.Messages;
 
 namespace Timesheets.WinClient
 {
     public class TimesheetViewModel : Screen
     {
+
+        #region Dependancies
+
+        private IEventAggregator messages;
+
+        #endregion
+
         #region Data Properties 
 
         public int ID
@@ -104,13 +112,20 @@ namespace Timesheets.WinClient
 
         #region Constructors
 
-        public TimesheetViewModel()
+        public TimesheetViewModel(IEventAggregator msgs)
         {
+            if (msgs == null) throw new ArgumentNullException(nameof(msgs));
 
+            this.messages = msgs;
         }
 
-        public TimesheetViewModel(Data.Model.Timesheet model)
+        public TimesheetViewModel(Data.Model.Timesheet model, IEventAggregator msgs)
         {
+            if (model == null) throw new ArgumentNullException(nameof(model));
+            if (msgs == null) throw new ArgumentNullException(nameof(msgs));
+
+            this.messages = msgs;
+
             var duration = TotalDuration(model.Entries);
 
             this.ID = model.ID;
@@ -131,7 +146,7 @@ namespace Timesheets.WinClient
 
         public void Save()
         {
-
+            this.messages.PublishOnUIThread(new SaveTimesheetMessage());
         }
 
         public void Remove()
