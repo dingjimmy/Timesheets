@@ -116,6 +116,8 @@
     </ApplicationDefinition>
     <Compile Include="Extensions\TimesheetExtensions.cs" />
     <Compile Include="Messages\AddTimesheetMessage.cs" />
+    <Compile Include="Messages\EditTimesheetMessage.cs" />
+    <Compile Include="Messages\RemoveTimesheetMessage.cs" />
     <Compile Include="Messages\SaveTimesheetMessage.cs" />
     <Compile Include="Messages\SelectTimesheetMessage.cs" />
     <Compile Include="Startup.cs" />

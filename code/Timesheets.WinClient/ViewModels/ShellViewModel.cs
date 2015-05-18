@@ -6,7 +6,7 @@ using Timesheets.WinClient.Messages;
 
 namespace Timesheets.WinClient
 {
-    public class ShellViewModel : Conductor<IScreen>, IHandle<AddTimesheetMessage>, IHandle<SelectTimesheetMessage>, IHandle<SaveTimesheetMessage>
+    public class ShellViewModel : Conductor<IScreen>, IHandle<AddTimesheetMessage>, IHandle<SelectTimesheetMessage>, IHandle<SaveTimesheetMessage>, IHandle<RemoveTimesheetMessage>, IHandle<EditTimesheetMessage>
     { 
         private ITimesheetDbContext data;
         private IWindowManager windows;
@@ -42,6 +42,7 @@ namespace Timesheets.WinClient
             vm.Customer = ts.Customer;
             vm.PeriodStarts = ts.PeriodStarts;
             vm.PeriodEnds = ts.PeriodEnds;
+            vm.State = TimesheetState.Edit;
 
             this.TimesheetList.Timesheets.Add(vm);
 
@@ -65,9 +66,29 @@ namespace Timesheets.WinClient
 
             data.SaveChanges();
 
-            System.Windows.MessageBox.Show("{ts.Name} has been saved!");
+            vm.State = TimesheetState.Detail;
 
-            ActivateItem(this.TimesheetList.SelectedTimesheet);
+        }
+
+        public void Handle(EditTimesheetMessage message)
+        {
+            this.TimesheetList.SelectedTimesheet.State = TimesheetState.Edit;
+        }
+
+        public void Handle(RemoveTimesheetMessage message)
+        {
+            var vm = this.TimesheetList.SelectedTimesheet;
+
+            var ts = data.Timesheets.Find(vm.ID);
+            data.Timesheets.Remove(ts);
+
+            this.DeactivateItem(vm, true);
+
+            this.TimesheetList.SelectedTimesheet = null;
+            this.TimesheetList.Timesheets.Remove(vm);
+
+
+            data.SaveChanges();
         }
 
         public Data.Model.Timesheet CreateBlankTimesheet()

@@ -167,7 +167,7 @@ namespace Timesheets.WinClient
 
         public void Remove()
         {
-            System.Windows.MessageBox.Show("Remove Timesheet.");
+            this.messages.PublishOnUIThread(new RemoveTimesheetMessage());
         }
 
 
@@ -186,10 +186,10 @@ namespace Timesheets.WinClient
         //            System.Windows.MessageBox.Show("Print Timesheet");
         //        }
         //
-        //        public void Edit()
-        //        {
-        //            System.Windows.MessageBox.Show("Edit Timesheet");
-        //        }
+        public void edit()
+        {
+            this.messages.PublishOnUIThread(new EditTimesheetMessage());
+        }
 
 
         #endregion

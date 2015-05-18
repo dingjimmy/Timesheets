@@ -62,7 +62,7 @@ namespace Timesheets.WinClient
 
         public void SelectTimesheet()
         {
-            this.messages.PublishOnUIThread(new SelectTimesheetMessage(this.selectedTimesheet.ID));
+            this.messages.PublishOnUIThread(new SelectTimesheetMessage());
         }
 
         public bool CanSelectTimesheet
