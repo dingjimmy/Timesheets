@@ -15,7 +15,6 @@ namespace Timesheets.WinClient
 
         public ITimesheetList TimesheetList { get; set; }
 
-
         public ShellViewModel(ITimesheetDbContext data, IWindowManager windows, IEventAggregator msgs, IKernel ioc)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));

@@ -16,6 +16,7 @@ namespace Timesheets.WinClient
 
         #endregion
 
+
         #region Data Properties 
 
         public int ID
@@ -94,6 +95,21 @@ namespace Timesheets.WinClient
             }
         }
         private int minutes;
+
+        public TimesheetState State
+        {
+            get {
+
+                return state;
+            }
+            set
+            {
+                state = value;
+                NotifyOfPropertyChange(() => State);
+            }
+        }
+        private TimesheetState state;
+
 
         #endregion
 
@@ -197,5 +213,11 @@ namespace Timesheets.WinClient
 
 
         #endregion
+    }
+
+    public enum  TimesheetState
+    {
+        Detail,
+        Edit
     }
 }
