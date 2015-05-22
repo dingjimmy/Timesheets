@@ -9,23 +9,31 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" 
              d:DesignWidth="300">
-    <UserControl.Resources>
-        <ResourceDictionary> 
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Resources/ListBox.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
+    
     <Grid Name="Root">
         <DockPanel>
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <Button Name="ViewSettings" Width="40" Height="40">Settings</Button>
-                <Grid Width="180" Height="40" >
-                    <!--Padding-->
-                </Grid>
-                <Button Name="SelectTimesheet" Width="40" Height="40">View</Button>
-                <Button Name="AddTimesheet" Width="40" Height="40">New</Button>
-            </StackPanel>
+            <Grid DockPanel.Dock="Top" Background="{StaticResource AccentColorBrush2}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <!--<Button Name="ViewSettings" Padding="10">Settings</Button>-->
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <!--<Button Name="SelectTimesheet" Padding="10">View</Button>-->
+                    <Button Name="AddTimesheet" Style="{DynamicResource FlatMenuButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="White" Width="13" Height="13" Margin="0,0,5,0">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_add}" Stretch="Fill" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock>Add</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
             <ListBox Name="Timesheets" cal:Message.Attach="[SelectionChanged]=[SelectTimesheet]" DockPanel.Dock="Top" Style="{DynamicResource TimesheetListStyle}" ItemContainerStyle="{DynamicResource TimesheetListItemStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

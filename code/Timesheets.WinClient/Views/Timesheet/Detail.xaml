@@ -5,29 +5,85 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Timesheets.WinClient"
              mc:Ignorable="d" 
-             d:DesignWidth="300"
-             d:DesignHeight="300">
+             d:DesignWidth="550"
+             d:DesignHeight="300"
+             FontSize="10pt">
+    
+    <UserControl.Resources>
+        <Style x:Name="ContentText" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBlock}" >
+            <Setter Property="Margin" Value="5,5,5,5" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
+        </Style>
+        <Style x:Name="HeaderText" x:Key="Heading" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="FontSize" Value="20pt" />
+            <Setter Property="FontFamily" Value="Segoe UI Light" />
+        </Style>
+    </UserControl.Resources>
     
     <DockPanel>
-        <Grid DockPanel.Dock="Top">
+        <Grid DockPanel.Dock="Top" Background="{StaticResource AccentColorBrush3}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
             <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Name="ShowList" Padding="10" >Back</Button>
+                <!--<Button Name="ShowList" Padding="10" >Back</Button>-->
             </StackPanel>
             
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="Email" Padding="10">Email</Button>
-                <Button Name="Print" Padding="10">Print</Button>
-                <Button Name="Edit" Padding="10">Edit</Button>
+                <Button Name="Export" Style="{StaticResource FlatMenuButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="White" Width="12.66" Height="15" Margin="0,0,5,0" >
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_page_file_pdf_tag}" Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock>Pdf</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="Email" Style="{StaticResource FlatMenuButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="White" Width="15" Height="11" Margin="0,0,5,0" >
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_email}" Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock>Email</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="Print" Style="{StaticResource FlatMenuButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="White" Width="15" Height="15" Margin="0,0,5,0">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_printer_text}" Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock>Print</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="Edit" Style="{StaticResource FlatMenuButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="White" Width="15" Height="15" Margin="0,0,5,0">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_edit_box}" Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock>Edit</TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
             
         </Grid>
-        <Grid >
-
-        </Grid>
+        <Border Padding="20,0" >
+            <StackPanel>
+                <TextBlock Name="Name" Style="{StaticResource Heading}" />
+                <TextBlock Name="Customer" />
+                <TextBlock Name="PeriodStarts" />
+                <TextBlock Name="PeriodEnds" />
+            </StackPanel>
+        </Border>
     </DockPanel>
 </UserControl>

@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Timesheets.WinClient">
+                    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="options">
 
     <SolidColorBrush x:Key="ListBox.Static.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFDADADA" />
@@ -10,7 +12,7 @@
     <Style x:Key="TimesheetListStyle" TargetType="{x:Type ListBox}">
         <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
-        <Setter Property="BorderThickness" Value="0,1,1,0"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
@@ -64,12 +66,12 @@
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FFDADADA"/>-->
 
-    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="{StaticResource AccentColor4}"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="{StaticResource AltAccentColor4}"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="{StaticResource Gray7}"/>
     <SolidColorBrush x:Key="Item.Border" Color="{StaticResource Gray7}"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="{StaticResource Gray10}"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="{StaticResource Gray7}"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="{StaticResource AccentColor3}"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="{StaticResource AltAccentColor3}"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="{StaticResource Gray7}"/>
 
     <Style x:Key="TimesheetListItemStyle" TargetType="{x:Type ListBoxItem}">

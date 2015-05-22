@@ -3,53 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:Timesheets.WinClient"
              mc:Ignorable="d" 
              d:DesignWidth="550"
              d:DesignHeight="600">
     <UserControl.Resources>
-        <Style x:Name="TextBoxStyle" TargetType="{x:Type TextBox}" >
+        <Style x:Name="TextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}" >
             <Setter Property="Margin" Value="5,5,5,5" />
             <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
         </Style>
         <Style x:Name="BigTextBoxStyle" x:Key="BigTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="FontSize" Value="20" />
-        </Style>
-        <Style x:Name="LabelStyle" TargetType="Label">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="FontSize" Value="20pt" />
+            <Setter Property="FontFamily" Value="Segoe UI Light" />
         </Style>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="45" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="75" />
-            <ColumnDefinition Width="0.7*" />
-        </Grid.ColumnDefinitions>
-        
-        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Name="Name" Style="{StaticResource BigTextBoxStyle}" />
+    
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Background="{StaticResource AccentColorBrush3}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="1" Grid.Column="0">Customer:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="Customer"></TextBox>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <!-- put some controls here.... -->
+            </StackPanel>
 
-        <Label Grid.Row="2" Grid.Column="0">From:</Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Name="PeriodStarts"></TextBox>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="Remove" Style="{StaticResource FlatMenuButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="White" Width="11.5" Height="15" Margin="0,0,5,0">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_delete}" Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock>Delete</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="Save" Style="{StaticResource FlatMenuButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="White" Width="15" Height="15" Margin="0,0,5,0">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_disk}" Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock>Save</TextBlock>
+                    </StackPanel>
+                </Button>             
+            </StackPanel>
 
-        <Label Grid.Row="3" Grid.Column="0">Until:</Label>
-        <TextBox Grid.Row="3" Grid.Column="1" Name="PeriodEnds"></TextBox>
+        </Grid>
+        <Border Padding="20,0">
+            <StackPanel>
+                <TextBox Name="Name" Style="{StaticResource BigTextBoxStyle}" metro:TextBoxHelper.Watermark="Name" metro:TextBoxHelper.SelectAllOnFocus="True"/>
+                <TextBox Name="Customer" metro:TextBoxHelper.Watermark="Customer" metro:TextBoxHelper.SelectAllOnFocus="True"></TextBox>
+                <TextBox Name="PeriodStarts" metro:TextBoxHelper.Watermark="From" metro:TextBoxHelper.SelectAllOnFocus="True"></TextBox>
+                <TextBox Name="PeriodEnds" metro:TextBoxHelper.Watermark="Until" metro:TextBoxHelper.SelectAllOnFocus="True"></TextBox>
+            </StackPanel>
+        </Border>
+    </DockPanel>
 
-
-        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="Remove" Width="100" Margin="0,0,5,0">Del</Button>
-            <Button Name="Save" Width="100">Save</Button>
-        </StackPanel>
-        
-    </Grid>
 </UserControl>

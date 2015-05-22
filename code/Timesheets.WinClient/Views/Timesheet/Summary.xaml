@@ -8,6 +8,12 @@
              d:DesignHeight="50" 
              d:DesignWidth="250">
     <UserControl.Resources>
+        <Style x:Key="HeaderText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
         <Style x:Key="AltText1" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#FF0068FF" />
             <Setter Property="FontSize" Value="10" />
@@ -28,7 +34,7 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
-        <TextBlock Name="Name" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <TextBlock Name="Name" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource HeaderText}"/>
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <TextBlock Name="Hours" Style="{StaticResource AltText1}" />
             <TextBlock xml:space="preserve" Text=" Hours, "  Style="{StaticResource AltText1}" />

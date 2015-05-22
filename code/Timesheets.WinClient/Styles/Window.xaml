@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
+
+    <Style x:Key="Window" TargetType="{x:Type metro:MetroWindow}">
+        <Setter Property="TitleCaps" Value="False" />
+        <Setter Property="TitleForeground" Value="{DynamicResource SemiTransparentWhiteBrush}" />
+        <Setter Property="WindowTitleBrush" Value="{DynamicResource WindowTitleBrush}" />
+        <Setter Property="NonActiveWindowTitleBrush" Value="{DynamicResource NonActiveWindowTitleBrush}" />
+        <Setter Property="GlowBrush" Value="{DynamicResource AccentColorBrush2}" />
+        <Setter Property="NonActiveGlowBrush" Value="Black" />
+        <!--<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />-->
+    </Style>
+    <Style x:Key="AppIcon" TargetType="{x:Type Rectangle}">
+        <Setter Property="Fill" Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="Margin" Value="10,3,0,0" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=IsActive, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="False">
+                <Setter Property="Fill" Value="{DynamicResource SemiTransparentWhiteBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

@@ -30,6 +30,8 @@ namespace Timesheets.WinClient
             this.messages.Subscribe(this);
 
             this.TimesheetList = ninject.Get<TimesheetListViewModel>();
+
+            this.DisplayName = "Timesheets";
         }
 
         public void Handle(AddTimesheetMessage message)
@@ -93,13 +95,7 @@ namespace Timesheets.WinClient
 
         public Data.Model.Timesheet CreateBlankTimesheet()
         {
-            var ts = new Data.Model.Timesheet()
-            {
-                Name = "New Timesheet",
-                Customer = "A Customer",
-                PeriodStarts = DateTime.Today,
-                PeriodEnds = DateTime.Today.AddMonths(1)
-            };
+            var ts = new Data.Model.Timesheet();
 
             data.Timesheets.Add(ts);
             data.SaveChanges();
