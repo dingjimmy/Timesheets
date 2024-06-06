@@ -5,7 +5,7 @@ namespace Timesheets.Data.Model
 {
     public class Timesheet
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         public string Name { get; set; }
         
@@ -17,11 +17,11 @@ namespace Timesheets.Data.Model
 
         public DateTime PeriodEnds { get; set; }
 
-        public ICollection<TimesheetEntry> Entries { get; set; }
+        public ICollection<TimesheetEntry> Entries { get; set; } = [];
 
         public Timesheet()
         {
-            this.Entries = new List<TimesheetEntry>();
+            
         }
         
     }

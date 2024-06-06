@@ -1,14 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+namespace Timesheets.Tests;
 
-namespace Timesheets.Tests
+public class UnitTest1
 {
-    [TestClass]
-    public class UnitTest1
+    [Fact]
+    public void Test1()
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
+
     }
 }
