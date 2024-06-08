@@ -35,9 +35,10 @@ public class MockResponseHandlers
         return Results.Ok(_Timesheets);
     }
 
+   
     public static IResult AddTimesheet(Timesheet ts)
     {
-        if (ts.ID == 0)
+        if (ts.ID != 0)
         {
             return Results.BadRequest();
         }
@@ -47,23 +48,33 @@ public class MockResponseHandlers
             return Results.BadRequest();
         }
 
-        ts.ID = _Timesheets.Last().ID++;
-
+        ts.ID = _Timesheets.Last().ID + 1;
         _Timesheets.Add(ts);
 
-        return Results.CreatedAtRoute("view-timesheet", { ID = ts.ID});
+        return Results.CreatedAtRoute("view-timesheet", new { ts.ID });
     }
 
-    public static IResult UpdateTimesheet(int id, Timesheet ts)
+    public static IResult UpdateTimesheet(int id, Timesheet nts)
     {
         if (!_Timesheets.Any(s => s.ID == id))
         {
             return Results.NotFound();
         }
-        
-        _Timesheets[id] = ts;
 
-        return Results.Ok();
+        try
+        {
+
+            nts.ID = id;
+            var idx = _Timesheets.FindIndex(ts => ts.ID == id);
+            _Timesheets[idx] = nts;
+
+            return Results.Ok();
+        }
+        catch     
+        {
+            //TODO: log error
+            return Results.StatusCode(StatusCodes.Status500InternalServerError);
+        }
     }
 
     public static IResult ViewTimesheet(int id)
@@ -80,12 +91,12 @@ public class MockResponseHandlers
 
 public class Timesheet
 {
-    public int ID { get; internal set; }
-    public DateTime PeriodEnds { get; internal set; }
-    public DateTime PeriodStarts { get; internal set; }
-    public string Employee { get; internal set; }
-    public string Customer { get; internal set; }
-    public string Name { get; internal set; }
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Employee { get; set; }
+    public string Customer { get; set; }
+    public DateTime PeriodEnds { get; set; }
+    public DateTime PeriodStarts { get; set; }
 
     public Timesheet(int id, string name, string customer, string employee, DateTime periodEnds, DateTime periodStarts)
     {

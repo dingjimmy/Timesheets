@@ -1,0 +1,31 @@
+GET http://localhost:5079/timesheets
+###
+
+POST http://localhost:5079/timesheet
+Content-Type: application/json
+
+{
+    "Name":"Week 1",
+    "Employee":"Bill Gates",
+    "Customer":"Microsoft",
+    "PeriodStarts":"2024-06-08",
+    "PeriodEnds": "2024-06-08"
+}
+
+###
+
+GET http://localhost:5079/timesheet/1001
+###
+
+PUT http://localhost:5079/timesheet/1001
+Content-Type: application/json
+
+{
+    "Name":"Week 51",
+    "Employee":"Bob The Builder",
+    "Customer":"Google",
+    "PeriodStarts":"2024-06-08",
+    "PeriodEnds": "2024-06-08"
+}
+
+###
