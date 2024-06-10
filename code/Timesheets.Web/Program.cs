@@ -1,8 +1,8 @@
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Timesheets.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddMvcCore();
 builder.Services.AddDbContext<TimesheetDbContext>(options =>
 {
     options.UseInMemoryDatabase("timesheets");
@@ -11,91 +11,9 @@ builder.Services.AddDbContext<TimesheetDbContext>(options =>
 var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
-app.MapGet("/timesheets", () => MockResponseHandlers.ListTimesheets());                                                        // list timesheets
-app.MapPost("/timesheet", (AddTimesheetRequest request) => MockResponseHandlers.AddTimesheet(request));                        // add new timesheet
-app.MapPut("/timesheet/{id}", (int id, UpdateTimesheetRequest request) => MockResponseHandlers.UpdateTimesheet(id, request));  // update timesheet {id}
-app.MapGet("/timesheet/{id}", (int id) => MockResponseHandlers.ViewTimesheet(id))
-   .WithName("view-timesheet");                                                                                                // view timesheet {id}
+app.MapDefaultControllerRoute();
 
 app.Run();
-
-
-
-public class MockResponseHandlers
-{
-    private static readonly TimesheetValidator _Validator = new TimesheetValidator();
-
-    static readonly List<Timesheet> _Timesheets = [
-        new Timesheet(1001,"2024 Week 5","HM Government","Winston Churchill",DateTime.Now.ToString() ,DateTime.Now.AddDays(1).ToString()),
-        new Timesheet(1002,"2024 Week 6","HM Government","Winston Churchill",DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()),
-        new Timesheet(1003,"2024 Week 7","HM Government","Winston Churchill",DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString())
-    ];
-
-    public static IResult ListTimesheets()
-    {
-        return Results.Ok(_Timesheets);
-    }
-
-    public static IResult ViewTimesheet(int id)
-    {
-        if (!_Timesheets.Any(s => s.ID == id))
-        {
-            return Results.NotFound();
-        }
-
-        return Results.Ok(_Timesheets.First(ts => ts.ID == id));
-    }
-   
-    public static IResult AddTimesheet(AddTimesheetRequest request)
-    {
-        if (!_Validator.IsValid(request.Name, request.Customer, request.Employee, request.PeriodStarts, request.PeriodEnds))
-        {
-            return Results.BadRequest();
-        }
-
-        try
-        {
-            var nextId = _Timesheets.Last().ID + 1;
-            var timesheet = new Timesheet(nextId, request.Name, request.Customer, request.Employee, request.PeriodStarts, request.PeriodEnds);
-            _Timesheets.Add(timesheet);
-
-            return Results.CreatedAtRoute("view-timesheet", new { timesheet.ID });
-        }
-        catch
-        {
-            //TODO: log error
-            return Results.StatusCode(StatusCodes.Status500InternalServerError);
-        }
-    }
-
-    public static IResult UpdateTimesheet(int id, UpdateTimesheetRequest request)
-    {
-        if (!_Validator.IsValid(request.Name, request.Customer, request.Employee, request.PeriodStarts, request.PeriodEnds))
-        {
-            return Results.BadRequest();
-        }
-        
-        if (!_Timesheets.Any(s => s.ID == id))
-        {
-            return Results.NotFound();
-        }
-
-        try
-        {
-            var timesheet = new Timesheet(id, request.Name, request.Customer, request.Employee, request.PeriodStarts, request.PeriodEnds);
-            var idx = _Timesheets.FindIndex(ts => ts.ID == id);
-            _Timesheets[idx] = timesheet;
-
-            return Results.Ok();
-        }
-        catch     
-        {
-            //TODO: log error
-            return Results.StatusCode(StatusCodes.Status500InternalServerError);
-        }
-    }
-}
 
 
 public class Timesheet
