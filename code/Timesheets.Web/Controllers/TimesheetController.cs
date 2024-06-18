@@ -12,15 +12,20 @@ namespace Timesheets.Web.Controllers
 
         static readonly Dictionary<int, Timesheet> _Timesheets = new()
         {
-            { 1001, new Timesheet(1001, "2024 Week 5", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) },
+            { 1001, new Timesheet(1001, "2024 Week 5", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(7).ToString()) },
             { 1002, new Timesheet(1002, "2024 Week 6", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) },
-            { 1003, new Timesheet(1003, "2024 Week 7", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) }
+            { 1003, new Timesheet(1003, "2024 Week 7", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) },
+            { 1004, new Timesheet(1004, "2024 Week 8", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) },
+            { 1005, new Timesheet(1005, "2024 Week 9", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) },
+            { 1006, new Timesheet(1006, "2024 Week 10", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) },
+            { 1007, new Timesheet(1007, "2024 Week 11", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) },
+            { 1008, new Timesheet(1008, "2024 Week 12", "HM Government", "Winston Churchill", DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString()) }
         };
 
         [HttpGet("timesheets")]
         public IActionResult ListTimesheets()
         {
-            return View();
+            return View(_Timesheets.Values);
         }
 
         [HttpGet("timesheet")]
