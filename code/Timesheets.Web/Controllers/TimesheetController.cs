@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
+using Timesheets.Domain;
+using Timesheets.Web.Models;
 
 namespace Timesheets.Web.Controllers
 {
@@ -28,21 +30,31 @@ namespace Timesheets.Web.Controllers
         }
 
         [HttpGet("timesheet/{id}")]
-        public ActionResult ViewTimesheet(int id, bool? edit)
+        public ActionResult ViewTimesheet(int id)
         {
             if (!_Timesheets.TryGetValue(id, out Timesheet? timesheet))
             {
                 return NotFound();
             }
 
-            var viewToReturn = edit == true ? "EditTimesheet" : "ViewTimesheet";
-            return View(viewToReturn, timesheet);
+            return View(timesheet);
+        }
+
+        [HttpGet("timesheet/{id}/edit")]
+        public ActionResult EditTimesheet(int id)
+        {
+            if (!_Timesheets.TryGetValue(id, out Timesheet? timesheet))
+            {
+                return NotFound();
+            }
+
+            return View(timesheet);
         }
 
         [HttpPost("timesheet")]
-        public ActionResult SaveNewTimesheet(AddTimesheetRequest request)
+        public ActionResult SaveNewTimesheet(AddTimesheetViewModel newTimeSheet)
         {
-            if (!_Validator.IsValid(request.Name, request.Customer, request.Employee, request.PeriodStarts, request.PeriodEnds))
+            if (!_Validator.IsValid(newTimeSheet.Name, newTimeSheet.Customer, newTimeSheet.Employee, newTimeSheet.PeriodStarts, newTimeSheet.PeriodEnds))
             {
                 return BadRequest();
             }
@@ -50,12 +62,12 @@ namespace Timesheets.Web.Controllers
             try
             {
                 var nextId = _Timesheets.Keys.Last() + 1;
-                var timesheet = new Timesheet(nextId, request.Name, request.Customer, request.Employee, request.PeriodStarts, request.PeriodEnds);
+                var timesheet = new Timesheet(nextId, newTimeSheet.Name, newTimeSheet.Customer, newTimeSheet.Employee, newTimeSheet.PeriodStarts, newTimeSheet.PeriodEnds);
                 _Timesheets.Add(nextId, timesheet);
 
-                return ViewTimesheet(timesheet.ID, false);
+                return ViewTimesheet(timesheet.ID);
             }
-            catch
+            catch 
             {
                 //TODO: log error
                 return StatusCode(StatusCodes.Status500InternalServerError);
@@ -63,9 +75,9 @@ namespace Timesheets.Web.Controllers
         }
 
         [HttpPut("timesheet/{id}")]
-        public ActionResult SaveEditedTimesheet(int id, UpdateTimesheetRequest request)
+        public ActionResult SaveEditedTimesheet(int id, UpdateTimesheetViewModel updatedTimeSheet)
         {
-            if (!_Validator.IsValid(request.Name, request.Customer, request.Employee, request.PeriodStarts, request.PeriodEnds))
+            if (!_Validator.IsValid(updatedTimeSheet.Name, updatedTimeSheet.Customer, updatedTimeSheet.Employee, updatedTimeSheet.PeriodStarts, updatedTimeSheet.PeriodEnds))
             {
                 return BadRequest();
             }
@@ -77,10 +89,10 @@ namespace Timesheets.Web.Controllers
 
             try
             {
-                var timesheet = new Timesheet(id, request.Name, request.Customer, request.Employee, request.PeriodStarts, request.PeriodEnds);
+                var timesheet = new Timesheet(id, updatedTimeSheet.Name, updatedTimeSheet.Customer, updatedTimeSheet.Employee, updatedTimeSheet.PeriodStarts, updatedTimeSheet.PeriodEnds);
                 _Timesheets[id] = timesheet;
 
-                return ViewTimesheet(id, false);
+                return ViewTimesheet(id);
             }
             catch
             {
