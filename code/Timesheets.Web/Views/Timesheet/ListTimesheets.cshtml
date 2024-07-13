@@ -1,9 +1,9 @@
-@using Timesheets.Domain
-@model IEnumerable<Timesheet>
+@using Timesheets.Web.Models
+@model IEnumerable<TimesheetViewModel>
 
 <div class="list-group">
     @{
-        foreach (Timesheet ts in Model)
+        foreach (TimesheetViewModel ts in Model)
         {
             <a class="list-group-item" hx-get="/timesheet/@ts.ID" hx-target="#content2" href="/timesheet/@ts.ID">
                 <div>

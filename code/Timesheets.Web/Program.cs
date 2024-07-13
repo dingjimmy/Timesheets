@@ -17,6 +17,10 @@ app.Run();
 
 namespace Timesheets.Domain
 {
+
+    /// <summary>
+    /// A record of the hours worked by a person for a given period.
+    /// </summary>
     public class Timesheet
     {
         public int ID { get; set; }
@@ -46,8 +50,14 @@ namespace Timesheets.Domain
         }
     }
 
+    /// <summary>
+    /// Helper class to confirm if timesheet data is correct or not.
+    /// </summary>
     public class TimesheetValidator()
     {
+        /// <summary>
+        /// Returns true if the timesheet data is valid, otherwise false.
+        /// </summary>
         public bool IsValid(string? name, string? customer, string? employee, string? periodStarts, string? periodEnds)
         {
             if (string.IsNullOrWhiteSpace(name)) return false;
@@ -58,37 +68,6 @@ namespace Timesheets.Domain
         
             return true;
         }
-    }
-
-}
-
-namespace Timesheets.Web.Models
-{ 
-
-    public class AddTimesheetViewModel
-    {
-        public string? Name { get; set; }
-
-        public string? Employee { get; set; }
-
-        public string? Customer { get; set; }
-
-        public string? PeriodEnds { get; set; }
-
-        public string? PeriodStarts { get; set; }
-    }
-
-    public class UpdateTimesheetViewModel
-    {
-        public string? Name { get; set; }
-
-        public string? Employee { get; set; }
-
-        public string? Customer { get; set; }
-
-        public string? PeriodEnds { get; set; }
-
-        public string? PeriodStarts { get; set; }
     }
 
 }
