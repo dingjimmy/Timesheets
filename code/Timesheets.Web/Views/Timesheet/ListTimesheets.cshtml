@@ -2,6 +2,7 @@
 @model IEnumerable<TimesheetViewModel>
 
 <div class="list-group">
+    <button class="btn btn-secondary" hx-get="/timesheet" hx-target="#content2">Add Timesheet</button>
     @{
         foreach (TimesheetViewModel ts in Model)
         {
