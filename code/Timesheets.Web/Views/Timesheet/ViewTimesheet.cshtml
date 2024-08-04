@@ -2,5 +2,59 @@
 @{
 }
 
+<style>
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        /* background-color: #eee */;
+        background-color: forestgreen;
+        border-radius: 50%;
+        display:block;
+    }
+
+    .container
+    {
+        position:relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .container select
+    {
+        background-color:none;
+        color:rebeccapurple;
+        appearance: none;
+    }
+
+    .container select option:checked ~ .checkmark
+    {
+        color:deeppink
+    }
+
+    .container select option:not(:checked)
+    {
+        color:darkred
+    }
+
+</style>
 
 <h2>View Timesheet @Model.ID</h2>
+
+<div class="container">
+    <select>
+        <option value="1">Foo</option>
+        <option value="2">Bar</option>
+        <option value="3">Whizz</option>
+        <option value="4">Bang</option>
+    </select>
+    <span class="checkmark"></span>
+</div>
