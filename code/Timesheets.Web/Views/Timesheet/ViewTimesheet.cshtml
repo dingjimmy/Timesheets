@@ -1,60 +1,73 @@
-﻿@model Timesheets.Web.Models.TimesheetViewModel
-@{
-}
-
-<style>
-
-    .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 25px;
-        width: 25px;
-        /* background-color: #eee */;
-        background-color: forestgreen;
-        border-radius: 50%;
-        display:block;
-    }
-
-    .container
-    {
-        position:relative;
-        padding-left: 35px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    .container select
-    {
-        background-color:none;
-        color:rebeccapurple;
-        appearance: none;
-    }
-
-    .container select option:checked ~ .checkmark
-    {
-        color:deeppink
-    }
-
-    .container select option:not(:checked)
-    {
-        color:darkred
-    }
-
-</style>
+﻿@using Timesheets.Web.Models;
+@model Timesheets.Web.Models.TimesheetViewModel
 
 <h2>View Timesheet @Model.ID</h2>
 
-<div class="container">
-    <select>
-        <option value="1">Foo</option>
-        <option value="2">Bar</option>
-        <option value="3">Whizz</option>
-        <option value="4">Bang</option>
-    </select>
-    <span class="checkmark"></span>
-</div>
+@{
+    // group the entries by day of the week
+    var entriesByDay = Model.Entries.GroupBy(entry => entry.DayOfWeek.Number).ToDictionary(x => x.Key, y => y.ToList());
+
+    <table>
+       <thead>
+            <tr>
+                <th></th>
+                @for (var hours = 8; hours <= 19; hours++)
+                {
+                <th>@hours</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+
+            @{
+            // loop through each day of the week
+            for (var day = 1; day <= 7; day++)
+            {
+                // build a dictionary of entries for the day of the week
+                var entriesByHour = entriesByDay[day].ToDictionary(entry => entry.HourOfDay, entry => entry.TypeOfWork);
+
+                // loop through each hour of the day
+                <tr>
+
+                    <th>@DayOfTheWeek.FromNumber(day).ToShortString()</th>
+
+                @for (var hour = 8; hour <= 19; hour++)
+                {
+                    <td>
+                    @{
+                        if (entriesByHour.TryGetValue(hour, out var work))
+                        {
+                            <select class="form-select form-select-sm">
+                                @foreach(var workType in Model.AvailableWorkTypes)
+                                {
+                                    <option @IsSelected(work, workType) value="@workType.ID">@workType.Name</option>
+                                }
+                            </select>
+                        }
+                        else
+                        {
+                            <select class="form-select form-select-sm">
+                                @foreach (var workType in Model.AvailableWorkTypes)
+                                {
+                                    <option value="@workType.ID">@workType.Name</option>
+                                }
+                            </select>
+                        }
+                    }
+                    </td>
+                }
+
+                </tr>
+            }
+            } 
+        </tbody>
+    </table>
+}
+
+@functions
+{
+    public string IsSelected(WorkType current, WorkType compare)
+    {
+        return current.ID == compare.ID ? "selected" : "";
+    }
+}

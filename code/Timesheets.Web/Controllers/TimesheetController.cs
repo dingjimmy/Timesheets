@@ -11,6 +11,17 @@ namespace Timesheets.Web.Controllers
     {
         private static readonly TimesheetValidator _Validator = new();
 
+        static readonly List<WorkType> _WorkTypes = new()
+        {
+            { WorkType.NotWorking },
+            { new WorkType(1, "Service Desk", "#00FF00") },
+            { new WorkType(2, "Project", "#0000FF") },
+            { new WorkType(3, "Personal Development", "#FFFF00") },
+            { new WorkType(4, "Line Management", "#00FFFF") },
+            { new WorkType(5, "Team Collaboration", "#000000") },
+            { new WorkType(6, "Other Collaboration", "#000000") }
+        };
+
         static readonly Dictionary<int, TimesheetViewModel> _Timesheets = new()
         {
             { 1001, CreateDemoTimesheet(1001, "2024 Week 5", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(7)) },
@@ -112,13 +123,13 @@ namespace Timesheets.Web.Controllers
 
             for (int day = 1; day <= 7; day++)
             {
-                for (int hour = 1; hour <= 10; hour++)
+                for (int hour = 8; hour <= 12; hour++)
                 {
-                    entries.Add(new TimesheetEntryViewModel(0, day, hour, WorkType.NotWorking));
+                    entries.Add(new TimesheetEntryViewModel(0, Models.DayOfTheWeek.FromNumber(day), hour, _WorkTypes[5]));
                 }
             }
 
-            var ts = new TimesheetViewModel(id, name, customer, employee, periodEnds, periodStarts, entries);
+            var ts = new TimesheetViewModel(id, name, customer, employee, periodEnds, periodStarts, entries, _WorkTypes);
 
             return ts;
         }
