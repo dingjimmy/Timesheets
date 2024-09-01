@@ -1,0 +1,9 @@
+﻿@using Timesheets.Web.Models
+@model TimesheetViewModel
+
+<a class="list-group-item" hx-get="/timesheet/@Model.ID" hx-target="#content2" href="/timesheet/@Model.ID">
+    <div>
+        <h5 class="mb-1">@Model.Name</h5>
+    </div>
+    <p class="mb-1">@Model.PeriodStarts.ToLongDateString() to @Model.PeriodEnds.ToLongDateString()</p>
+</a>
