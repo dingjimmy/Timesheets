@@ -2,9 +2,25 @@
 @model IEnumerable<TimesheetViewModel>
 
 <div class="list-group">
-    <button class="btn btn-secondary" hx-get="/timesheet" hx-target="#content2">Add Timesheet</button>
-    @{
-        foreach (TimesheetViewModel ts in Model)
+
+    <!-- search timesheets molecule -->
+    <div class="list-group-item">
+        <div class="input-group">
+            <input type="text" class="form-control" />
+            <button class="btn btn-secondary">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- add new timesheet molecule-->
+    <div class="list-group-item">
+        <div class="d-grid">
+            <button class="btn btn-primary" hx-get="/timesheet" hx-target="#content2">Add Timesheet</button>
+        </div>
+    </div>     
+
+    @foreach (TimesheetViewModel ts in Model)
         {
             <a class="list-group-item" hx-get="/timesheet/@ts.ID" hx-target="#content2" href="/timesheet/@ts.ID">
                 <div>
