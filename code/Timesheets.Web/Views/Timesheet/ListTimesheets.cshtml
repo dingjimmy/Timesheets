@@ -4,25 +4,12 @@
 
 <div class="list-group">
 
-    <!-- search timesheets molecule -->
-    <div class="list-group-item">
-        <div class="input-group">
-            <input type="text" class="form-control" />
-            <button class="btn btn-secondary">
-                <i class="bi bi-search"></i>
-            </button>
-        </div>
-    </div>
+    <partial name="Molecules/TimesheetListSearch" />
 
-    <!-- add new timesheet molecule-->
-    <div class="list-group-item">
-        <div class="d-grid">
-            <button class="btn btn-primary" hx-get="/timesheet" hx-target="#content2">Add Timesheet</button>
-        </div>
-    </div>     
+    <partial name="Molecules/TimesheetListAdd" />   
 
     @foreach (TimesheetViewModel ts in Model)
     {
-        <partial name="Molecules/_TimesheetListItem" model="@ts" />
+        <partial name="Molecules/TimesheetListItem" model="@ts" />
     }
 </div>
