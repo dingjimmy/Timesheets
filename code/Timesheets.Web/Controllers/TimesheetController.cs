@@ -46,28 +46,6 @@ namespace Timesheets.Web.Controllers
             return View();
         }
 
-        [HttpGet("timesheet/{id}")]
-        public ActionResult ViewTimesheet(int id)
-        {
-            if (!_Timesheets.TryGetValue(id, out TimesheetViewModel? timesheet))
-            {
-                return NotFound();
-            }
-
-            return View(timesheet);
-        }
-
-        [HttpGet("timesheet/{id}/edit")]
-        public ActionResult EditTimesheet(int id)
-        {
-            if (!_Timesheets.TryGetValue(id, out TimesheetViewModel? timesheet))
-            {
-                return NotFound();
-            }
-
-            return View(timesheet);
-        }
-
         [HttpPost("timesheet")]
         public ActionResult SaveNewTimesheet(NewTimesheetSaveModel newTimeSheet)
         {
@@ -89,6 +67,17 @@ namespace Timesheets.Web.Controllers
                 //TODO: log error
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
+
+        [HttpGet("timesheet/{id}")]
+        public ActionResult ViewTimesheet(int id)
+        {
+            if (!_Timesheets.TryGetValue(id, out TimesheetViewModel? timesheet))
+            {
+                return NotFound();
+            }
+
+            return View(timesheet);
         }
 
         [HttpPut("timesheet/{id}")]
