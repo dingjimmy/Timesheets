@@ -3,7 +3,7 @@
 namespace Timesheets.Web.Models
 {
     /// <summary>
-    /// Represents a timesheet that records the hours worked by a person for a given period.
+    /// Represents the data needed to display a <see cref="Timesheets.Domain.Timesheet"/> on screen.
     /// </summary>
     public record TimesheetViewModel(
         int ID,

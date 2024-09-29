@@ -1,73 +1,35 @@
 ﻿@using Timesheets.Web.Models;
 @model Timesheets.Web.Models.TimesheetViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <h2>View Timesheet @Model.ID</h2>
 
 @{
-    // group the entries by day of the week
-    var entriesByDay = Model.Entries.GroupBy(entry => entry.DayOfWeek.Number).ToDictionary(x => x.Key, y => y.ToList());
-
-    <table>
-       <thead>
-            <tr>
-                <th></th>
-                @for (var hours = 8; hours <= 19; hours++)
-                {
-                <th>@hours</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-
-            @{
-            // loop through each day of the week
-            for (var day = 1; day <= 7; day++)
-            {
-                // build a dictionary of entries for the day of the week
-                var entriesByHour = entriesByDay[day].ToDictionary(entry => entry.HourOfDay, entry => entry.TypeOfWork);
-
-                // loop through each hour of the day
-                <tr>
-
-                    <th>@DayOfTheWeek.FromNumber(day).ToShortString()</th>
-
-                @for (var hour = 8; hour <= 19; hour++)
-                {
-                    <td>
-                    @{
-                        if (entriesByHour.TryGetValue(hour, out var work))
-                        {
-                            <select class="form-select form-select-sm">
-                                @foreach(var workType in Model.AvailableWorkTypes)
-                                {
-                                    <option @IsSelected(work, workType) value="@workType.ID">@workType.Name</option>
-                                }
-                            </select>
-                        }
-                        else
-                        {
-                            <select class="form-select form-select-sm">
-                                @foreach (var workType in Model.AvailableWorkTypes)
-                                {
-                                    <option value="@workType.ID">@workType.Name</option>
-                                }
-                            </select>
-                        }
-                    }
-                    </td>
-                }
-
-                </tr>
-            }
-            } 
-        </tbody>
-    </table>
+    switch(CheckUserAccess())
+    {
+        case UserAccess.None:
+            <partial name="Molecules/TimesheetDetailNoAccess" model="@Model" />
+            break;
+        case UserAccess.CanRead:
+            <partial name="Molecules/TimesheetDetailViewer" model="@Model" />
+            break;
+        case UserAccess.CanWrite:
+            <partial name="Molecules/TimesheetDetailEditor" model="@Model" />
+            break;
+    }
 }
 
 @functions
 {
-    public string IsSelected(WorkType current, WorkType compare)
+    private UserAccess CheckUserAccess()
     {
-        return current.ID == compare.ID ? "selected" : "";
+        return UserAccess.CanWrite;
+    }
+
+    private enum UserAccess
+    {
+        None,
+        CanRead,
+        CanWrite
     }
 }
