@@ -14,12 +14,12 @@ namespace Timesheets.Web.Controllers
         static readonly List<WorkType> _WorkTypes = new()
         {
             { WorkType.NotWorking },
-            { new WorkType(1, "Service Desk", "#00FF00") },
-            { new WorkType(2, "Project", "#0000FF") },
-            { new WorkType(3, "Personal Development", "#FFFF00") },
-            { new WorkType(4, "Line Management", "#00FFFF") },
-            { new WorkType(5, "Team Collaboration", "#000000") },
-            { new WorkType(6, "Other Collaboration", "#000000") }
+            { new WorkType(1, "SD Service Desk", "#00FF00") },
+            { new WorkType(2, "PW Project", "#0000FF") },
+            { new WorkType(3, "PD Personal Development", "#FFFF00") },
+            { new WorkType(4, "LM Line Management", "#00FFFF") },
+            { new WorkType(5, "TC Team Collaboration", "#000000") },
+            { new WorkType(6, "OC Other Collaboration", "#000000") }
         };
 
         static readonly Dictionary<int, TimesheetViewModel> _Timesheets = new()
