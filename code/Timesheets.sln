@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Data", "Timesheets.Data\Timesheets.Data.csproj", "{CBEE6CA7-CF06-41FE-9057-4E4881407A6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheets.Data", "Timesheets.Data\Timesheets.Data.csproj", "{CBEE6CA7-CF06-41FE-9057-4E4881407A6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Tests", "Timesheets.Tests\Timesheets.Tests.csproj", "{250F4E90-45F1-4E6F-8CA9-F5B4B5ED9E99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheets.Tests", "Timesheets.Tests\Timesheets.Tests.csproj", "{250F4E90-45F1-4E6F-8CA9-F5B4B5ED9E99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Web", "Timesheets.Web\Timesheets.Web.csproj", "{4C03BC9F-F3A6-4062-A107-A1E737A62727}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheets.Web", "Timesheets.Web\Timesheets.Web.csproj", "{4C03BC9F-F3A6-4062-A107-A1E737A62727}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
