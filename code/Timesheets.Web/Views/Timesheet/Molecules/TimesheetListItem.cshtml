@@ -1,7 +1,7 @@
 ﻿@using Timesheets.Web.Models
 @model TimesheetViewModel
 
-<a class="list-group-item" hx-get="/timesheet/@Model.ID" hx-target="#content2" href="/timesheet/@Model.ID">
+<a class="list-group-item" hx-get="/timesheets/@Model.ID" hx-target="#timesheet-detail" href="/timesheet/@Model.ID">
     <div>
         <h5 class="mb-1">@Model.Name</h5>
     </div>

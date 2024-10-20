@@ -31,22 +31,40 @@ namespace Timesheets.Web.Controllers
             { 1005, CreateDemoTimesheet(1005, "2024 Week 9", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(1)) },
             { 1006, CreateDemoTimesheet(1006, "2024 Week 10", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(1)) },
             { 1007, CreateDemoTimesheet(1007, "2024 Week 11", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(1)) },
-            { 1008, CreateDemoTimesheet(1008, "2024 Week 12", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(1)) }
+            { 1008, CreateDemoTimesheet(1008, "2024 Week 12", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(1)) },
+            { 1009, CreateDemoTimesheet(1009, "2024 Week 13", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(1)) }
         };
+
 
         [HttpGet("timesheets")]
         public IActionResult ListTimesheets()
         {
-            return View(_Timesheets.Values);
+            if (IsPartialRequest())
+            {
+                PushHistoryUrl(Url.Action("ListTimesheets"));
+                return PartialView("Organisms/Timesheets", _Timesheets.Values);
+            }
+            else
+            {
+                return View("Organisms/Timesheets", _Timesheets.Values);
+            }
         }
 
-        [HttpGet("timesheet")]
+        [HttpGet("timesheets/new")]
         public ActionResult NewTimesheet()
         {
-            return View();
+            if (IsPartialRequest())
+            {
+                PushHistoryUrl(Url.Action("NewTimesheet"));
+                return PartialView("Organisms/NewTimesheet");
+            }
+            else
+            {
+                return View("Organisms/Timesheets", _Timesheets.Values);
+            }
         }
 
-        [HttpPost("timesheet")]
+        [HttpPost("timesheets")]
         public ActionResult SaveNewTimesheet(NewTimesheetSaveModel newTimeSheet)
         {
             if (!_Validator.IsValid(newTimeSheet.Name, newTimeSheet.Customer, newTimeSheet.Employee, newTimeSheet.PeriodStarts, newTimeSheet.PeriodEnds))
@@ -69,7 +87,7 @@ namespace Timesheets.Web.Controllers
             }
         }
 
-        [HttpGet("timesheet/{id}")]
+        [HttpGet("timesheets/{id}")]
         public ActionResult ViewTimesheet(int id)
         {
             if (!_Timesheets.TryGetValue(id, out TimesheetViewModel? timesheet))
@@ -77,12 +95,25 @@ namespace Timesheets.Web.Controllers
                 return NotFound();
             }
 
-            return View(timesheet);
+            //if (!IsPartialRequest())
+            //{
+            //    return View("Organisms/Timesheets", _Timesheets.Values, timesheet);
+            //}
+            //else
+            //{
+                PushHistoryUrl(Url.Action("ViewTimesheet", new { id }));
+                return PartialView("Organisms/ViewTimesheet", timesheet);
+            //}
         }
 
-        [HttpPut("timesheet/{id}")]
+        [HttpPut("timesheets/{id}")]
         public ActionResult SaveEditedTimesheet(int id, TimesheetSaveModel updatedTimeSheet)
         {
+            if (IsPartialRequest())
+            {
+                return BadRequest();
+            }
+
             if (!_Validator.IsValid(updatedTimeSheet.Name, updatedTimeSheet.Customer, updatedTimeSheet.Employee, updatedTimeSheet.PeriodStarts, updatedTimeSheet.PeriodEnds))
             {
                 return BadRequest();
@@ -104,6 +135,31 @@ namespace Timesheets.Web.Controllers
                 //TODO: log error
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
+
+        /// <summary>
+        /// Determines if the current request is for a partial page or full page.
+        /// </summary>
+        /// <remarks>
+        /// Uses the 'HX-Request' header to determine if the request was triggered by HTMX, which 
+        /// indicates a partial request.
+        /// </remarks>
+        private bool IsPartialRequest()
+        {
+            return Request.Headers.ContainsKey("HX-Request");
+        }
+
+        /// <summary>
+        /// Pushes a URL into the browser's location history.
+        /// </summary>
+        /// <remarks>
+        /// Uses the 'HX-Push-Url' resonse header to tell HTMX on the browser to push a URL into the browser's 
+        /// location history. This creates a new history entry, allowing navigation with the browser’s back and 
+        /// forward buttons. 
+        /// </remarks>
+        private void PushHistoryUrl(string? url)
+        {
+            Response.Headers.Append("HX-Push-Url", url);
         }
 
         private static TimesheetViewModel CreateDemoTimesheet(int id, string name, string customer, string employee, DateTime periodEnds, DateTime periodStarts)
