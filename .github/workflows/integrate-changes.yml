@@ -1,5 +1,5 @@
-name: Integrate
-run-name: Integrate changes to ''${{ github.ref_name }}'' branch
+name: Integrate Changes
+run-name: Integrate changes to '${{ github.ref_name }}' branch
 on:
   push:
   
