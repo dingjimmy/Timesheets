@@ -12,7 +12,7 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
     - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@3.1.0
+      uses: SonarSource/sonarcloud-github-action@v3.1.0
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Setup .NET
