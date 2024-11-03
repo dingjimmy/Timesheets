@@ -6,8 +6,9 @@ serves as a playground for experimenting with new software engineering tools, te
 ## Built With
 - [Asp.Net Core](https://dotnet.microsoft.com/en-us/apps/aspnet)
 - [HTMX](https://htmx.org/)
-- [Bootstrap](https://getbootstrap.com/)
-- [Entity Framework Core](https://learn.microsoft.com/en-gb/ef/core/)
+- [Bootstrap](https://getbootstrap.com)
+- [Entity Framework Core](https://learn.microsoft.com/en-gb/ef/core)
+- [Sonar Cloud](https://www.sonarsource.com/products/sonarcloud)
 
 ## Getting Started
 
