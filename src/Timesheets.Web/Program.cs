@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using Timesheets.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -67,6 +68,36 @@ namespace Timesheets.Domain
             if (!DateTime.TryParse(periodEnds, out _)) return false;
         
             return true;
+        }
+    }
+
+
+    public class Result
+    {
+        private static readonly Result _SuccessResult = new() { IsFailure = false };
+        
+        public bool IsFailure { get; protected init; }
+        public string Error { get; private init; } = string.Empty;
+
+        public static Result Fail(string error)
+        {
+            return new Result { IsFailure = true, Error = error };
+        }
+
+        public static Result Success()
+        {
+            return _SuccessResult;
+        }
+
+    }
+
+    public class Result<T> : Result
+    {
+        public T? Value { get; set; }
+
+        public static Result<T> Success(T createdObject)
+        {
+            return new Result<T> { IsFailure = false, Value = createdObject };
         }
     }
 

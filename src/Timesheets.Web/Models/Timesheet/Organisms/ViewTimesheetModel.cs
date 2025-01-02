@@ -1,11 +1,9 @@
-﻿using System.Drawing;
-
-namespace Timesheets.Web.Models
+﻿namespace Timesheets.Web.Models.Timesheet.Organisms
 {
     /// <summary>
     /// Represents the data needed to display a <see cref="Timesheets.Domain.Timesheet"/> on screen.
     /// </summary>
-    public record TimesheetViewModel(
+    public record ViewTimesheetModel(
         int ID,
         string Name,
         string Employee,

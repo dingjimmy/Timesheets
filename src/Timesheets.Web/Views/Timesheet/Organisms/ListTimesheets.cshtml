@@ -1,5 +1,6 @@
 @using Timesheets.Web.Models
-@model IEnumerable<TimesheetViewModel>
+@using Timesheets.Web.Models.Timesheet.Organisms
+@model IEnumerable<Timesheets.Web.Models.Timesheet.Organisms.ViewTimesheetModel>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="list-group">
@@ -8,7 +9,7 @@
 
     <partial name="Molecules/TimesheetListAdd" />   
 
-    @foreach (TimesheetViewModel ts in Model)
+    @foreach (ViewTimesheetModel ts in Model)
     {
         <partial name="Molecules/TimesheetListItem" model="@ts" />
     }
