@@ -1,4 +1,30 @@
-﻿@{
-}
+﻿@model Timesheets.Web.Models.Timesheet.Organisms.NewTimesheetModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<h2>Create New Timesheet</h2>
+
+<form hx-post="/timesheets" hx-swap="outerHTML">
+
+    <h2>Create New Timesheet</h2>
+
+    <div class="mb-3">
+        <partial name="Molecules/TextInput" for="@Model.Name" />
+    </div>
+
+    <div class="mb-3">
+        <partial name="Molecules/TextInput" for="@Model.Employee" />
+    </div>
+    
+    <div class="mb-3">
+        <partial name="Molecules/TextInput" for="@Model.Customer" />
+    </div>
+
+    @* <div class="mb-3"> *@
+    @*     <partial name="Molecules/DateInput" for="@Model.PeriodStarts" /> *@
+    @* </div> *@
+    @* *@
+    @* <div class="mb-3"> *@
+    @*     <partial name="Molecules/DateInput" for="@Model.PeriodEnds" /> *@
+    @* </div> *@
+
+    <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model Timesheets.Web.Models.Shared.Molecules.DateInputModel
+
+@if (ViewData.ModelState.TryGetValue(Model.Name, out var state) && state.ValidationState == ModelValidationState.Invalid)
+{
+    <label for=@Model.Name class="form-label">@Model.Name</label>
+    <input name="@Model.Name" type="text" class="form-control is-invalid" value="@state.AttemptedValue" />
+    <div class="invalid-feedback">@state.Errors[0].ErrorMessage</div>
+}  
+else
+{
+    <label for=@Model.Name class="form-label">@Model.Name</label>
+    <input name="@Model.Name" type="date" value="@Model.Value" class="form-control" />
+}
