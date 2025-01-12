@@ -18,13 +18,13 @@
         <partial name="Molecules/TextInput" for="@Model.Customer" />
     </div>
 
-    @* <div class="mb-3"> *@
-    @*     <partial name="Molecules/DateInput" for="@Model.PeriodStarts" /> *@
-    @* </div> *@
-    @* *@
-    @* <div class="mb-3"> *@
-    @*     <partial name="Molecules/DateInput" for="@Model.PeriodEnds" /> *@
-    @* </div> *@
+    <div class="mb-3">
+        <partial name="Molecules/DateInput" for="@Model.PeriodStarts" />
+    </div>
+    
+    <div class="mb-3">
+        <partial name="Molecules/DateInput" for="@Model.PeriodEnds" />
+    </div>
 
     <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
 </form>

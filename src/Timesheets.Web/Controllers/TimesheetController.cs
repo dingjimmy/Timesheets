@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
-using System.Text.Encodings.Web;
 using Timesheets.Domain;
-using Timesheets.Web.Models;
 using Timesheets.Web.Models.Timesheet.Organisms;
 using NewTimesheetModel = Timesheets.Web.Models.Timesheet.Organisms.NewTimesheetModel;
 
@@ -87,7 +83,7 @@ namespace Timesheets.Web.Controllers
             // create timesheet
             try
             {
-                var timesheet = CreateTimesheet(newTimeSheet.Name.Value!, newTimeSheet.Customer.Value!, newTimeSheet.Employee.Value!, DateTime.Now.ToString(), DateTime.Now.ToString()); // newTimeSheet.PeriodStarts!, newTimeSheet.PeriodEnds!);
+                var timesheet = CreateTimesheet(newTimeSheet.Name.Value!, newTimeSheet.Customer.Value!, newTimeSheet.Employee.Value!, newTimeSheet.PeriodStarts.Value, newTimeSheet.PeriodEnds.Value);
 
                 return ViewTimesheet(timesheet.ID);
             }
@@ -174,7 +170,7 @@ namespace Timesheets.Web.Controllers
             Response.Headers.Append("HX-Push-Url", url);
         }
 
-        private static ViewTimesheetModel CreateDemoTimesheet(int id, string name, string customer, string employee, DateTime periodEnds, DateTime periodStarts)
+        private static ViewTimesheetModel CreateDemoTimesheet(int id, string name, string customer, string employee, DateTime periodStarts, DateTime periodEnds)
         {
             var entries = new List<TimesheetEntryViewModel>();
 

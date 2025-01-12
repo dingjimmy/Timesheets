@@ -17,9 +17,9 @@ namespace Timesheets.Web.Models.Timesheet.Organisms
         
         public TextInputModel Customer { get; set; } = new(nameof(Customer));
 
-        // public DateInputModel PeriodEnds { get; set; } = new DateInputModel(nameof(PeriodEnds));
+        public DateInputModel PeriodEnds { get; set; } = new(nameof(PeriodEnds));
         
-        // public DateInputModel PeriodStarts { get; set; } = new DateInputModel(nameof(PeriodStarts));
+        public DateInputModel PeriodStarts { get; set; } = new(nameof(PeriodStarts));
 
         public NewTimesheetModel()
         {
@@ -31,36 +31,36 @@ namespace Timesheets.Web.Models.Timesheet.Organisms
             if (string.IsNullOrWhiteSpace(Name.Value) || !NameRegex().IsMatch(Name.Value))
             {
                 yield return new ValidationResult(
-                    "Must be between 5 and 128 characters long, and only contain letters and numbers.", ["Name"]);
+                    "Must be between 5 and 128 characters long, and only contain letters and numbers.", [nameof(Employee)]);
             }
 
             if (string.IsNullOrWhiteSpace(Customer.Value) || !CustomerRegex().IsMatch(Customer.Value))
             {
                 yield return new ValidationResult(
-                    "Must be between 5 and 128 characters long, and only contain letters and numbers.", ["Customer"]);
+                    "Must be between 5 and 128 characters long, and only contain letters and numbers.", [nameof(Customer)]);
             }
 
             if (string.IsNullOrWhiteSpace(Employee.Value) || !EmployeeRegex().IsMatch(Employee.Value))
             {
                 yield return new ValidationResult(
-                    "Must be between 5 and 128 characters long, and only contain letters and numbers.", ["Employee"]);
+                    "Must be between 5 and 128 characters long, and only contain letters and numbers.", [nameof(Employee)]);
             }
 
-            // if (!DateTime.TryParse(PeriodStarts, out var start))
-            // {
-            //     yield return new ValidationResult("Start date must be a valid date.", ["Period Starts"]);
-            // }
-            //
-            // if (!DateTime.TryParse(PeriodEnds, out var end))
-            // {
-            //     yield return new ValidationResult("Is not a valid date.", ["Period Ends"]);
-            // }
-            //
-            // if (start >= end)
-            // {
-            //     yield return new ValidationResult("Start date must be before the end date.",
-            //         ["Period Starts", "Period Ends"]);
-            // }
+            if (!DateTime.TryParse(PeriodStarts.Value, out var start))
+            {
+                yield return new ValidationResult("Start date must be a valid date.", [nameof(PeriodStarts)]);
+            }
+            
+            if (!DateTime.TryParse(PeriodEnds.Value, out var end))
+            {
+                yield return new ValidationResult("End date must be a valid date.", [nameof(PeriodEnds)]);
+            }
+            
+            if (start >= end)
+            {
+                yield return new ValidationResult("Start date must be before the end date.",
+                    [nameof(PeriodEnds), nameof(PeriodStarts)]);
+            }
         }
 
         [GeneratedRegex("^[a-zA-Z0-9 .?!]{5,128}$", RegexOptions.Multiline, 500)]
