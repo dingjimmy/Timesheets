@@ -67,7 +67,7 @@ namespace Timesheets.Web.Controllers
             }
         }
 
-        [HttpPost("timesheets")]
+        [HttpPost("timesheets/new")]
         public ActionResult SaveNewTimesheet(NewTimesheetModel newTimeSheet)
         {
             // validate inputs
