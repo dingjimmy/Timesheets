@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model Timesheets.Web.Models.Shared.Molecules.DateInputModel
+
+@if (HasValidationErrors())
+{
+    <label for=@Model.Name class="form-label">@Model.Name</label>
+    <input name="@Model.Name" type="date" class="form-control is-invalid" value="@_ModelState?.AttemptedValue" />
+    <div class="invalid-feedback">@_ModelState?.Errors[0].ErrorMessage</div>
+}  
+else
+{
+    <label for=@Model.Name class="form-label">@Model.Name</label>
+    <input name="@Model.Name" type="date" value="@Model.Value" class="form-control" />
+}
+
+@functions
+{
+    private ModelStateEntry? _ModelState;
+    
+    private bool HasValidationErrors()
+    {
+        return ViewData.ModelState.TryGetValue(Model.Name, out _ModelState) && _ModelState.ValidationState == ModelValidationState.Invalid;
+    }
+}

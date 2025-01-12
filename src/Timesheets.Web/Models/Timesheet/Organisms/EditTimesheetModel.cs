@@ -1,9 +1,9 @@
-﻿namespace Timesheets.Web.Models
+﻿namespace Timesheets.Web.Models.Timesheet.Organisms
 {
     /// <summary>
-    /// Represents a new timesheet to be added to the system.
+    /// Represents an existing timesheet with changes that need to be saved.
     /// </summary>
-    public record NewTimesheetSaveModel(
+    public record EditTimesheetModel(
         string? Name,
         string? Employee,
         string? Customer,

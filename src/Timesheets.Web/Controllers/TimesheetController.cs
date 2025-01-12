@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
-using System.Text.Encodings.Web;
+ï»¿using Microsoft.AspNetCore.Mvc;
 using Timesheets.Domain;
-using Timesheets.Web.Models;
+using Timesheets.Web.Models.Timesheet.Organisms;
+using NewTimesheetModel = Timesheets.Web.Models.Timesheet.Organisms.NewTimesheetModel;
 
 namespace Timesheets.Web.Controllers
 {
@@ -22,7 +21,7 @@ namespace Timesheets.Web.Controllers
             { new WorkType(6, "OC Other Collaboration", "#000000") }
         };
 
-        static readonly Dictionary<int, TimesheetViewModel> _Timesheets = new()
+        static readonly Dictionary<int, ViewTimesheetModel> _Timesheets = new()
         {
             { 1001, CreateDemoTimesheet(1001, "2024 Week 5", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(7)) },
             { 1002, CreateDemoTimesheet(1002, "2024 Week 6", "HM Government", "Winston Churchill", DateTime.Now, DateTime.Now.AddDays(1)) },
@@ -56,7 +55,7 @@ namespace Timesheets.Web.Controllers
             if (IsPartialRequest())
             {
                 PushHistoryUrl(Url.Action("NewTimesheet"));
-                return PartialView("Organisms/NewTimesheet");
+                return PartialView("Organisms/NewTimesheet", new NewTimesheetModel());
             }
             else
             {
@@ -64,33 +63,42 @@ namespace Timesheets.Web.Controllers
             }
         }
 
-        [HttpPost("timesheets")]
-        public ActionResult SaveNewTimesheet(NewTimesheetSaveModel newTimeSheet)
+        [HttpPost("timesheets/new")]
+        public ActionResult SaveNewTimesheet(NewTimesheetModel newTimeSheet)
         {
-            if (!_Validator.IsValid(newTimeSheet.Name, newTimeSheet.Customer, newTimeSheet.Employee, newTimeSheet.PeriodStarts, newTimeSheet.PeriodEnds))
-            {
-                return BadRequest();
+            // validate inputs
+            if (!ModelState.IsValid)
+            {                
+                return PartialView("Organisms/NewTimesheet", newTimeSheet);
             }
 
+            // validate state
+            var result = CanCreateTimesheet(newTimeSheet);
+            if (result.IsFailure)
+            { 
+                ModelState.AddModelError("", result.Error);
+                return PartialView("Organisms/NewTimesheet", newTimeSheet);
+            }
+
+            // create timesheet
             try
             {
-                var nextId = _Timesheets.Keys.Last() + 1;
-                var timesheet = CreateDemoTimesheet(nextId, newTimeSheet.Name, newTimeSheet.Customer, newTimeSheet.Employee, DateTime.Parse(newTimeSheet.PeriodStarts!.ToString()), DateTime.Parse(newTimeSheet.PeriodEnds!.ToString()));
-                _Timesheets.Add(nextId, timesheet);
+                var timesheet = CreateTimesheet(newTimeSheet.Name.Value!, newTimeSheet.Customer.Value!, newTimeSheet.Employee.Value!, newTimeSheet.PeriodStarts.Value, newTimeSheet.PeriodEnds.Value);
 
                 return ViewTimesheet(timesheet.ID);
             }
             catch
             {
                 //TODO: log error
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                ModelState.AddModelError("", "An error occurred while creating the timesheet.");
+                return PartialView("Organisms/NewTimesheet", newTimeSheet);
             }
         }
 
         [HttpGet("timesheets/{id}")]
         public ActionResult ViewTimesheet(int id)
         {
-            if (!_Timesheets.TryGetValue(id, out TimesheetViewModel? timesheet))
+            if (!_Timesheets.TryGetValue(id, out ViewTimesheetModel? timesheet))
             {
                 return NotFound();
             }
@@ -107,7 +115,7 @@ namespace Timesheets.Web.Controllers
         }
 
         [HttpPut("timesheets/{id}")]
-        public ActionResult SaveEditedTimesheet(int id, TimesheetSaveModel updatedTimeSheet)
+        public ActionResult SaveEditedTimesheet(int id, EditTimesheetModel updatedTimeSheet)
         {
             if (IsPartialRequest())
             {
@@ -154,7 +162,7 @@ namespace Timesheets.Web.Controllers
         /// </summary>
         /// <remarks>
         /// Uses the 'HX-Push-Url' resonse header to tell HTMX on the browser to push a URL into the browser's 
-        /// location history. This creates a new history entry, allowing navigation with the browser’s back and 
+        /// location history. This creates a new history entry, allowing navigation with the browserï¿½s back and 
         /// forward buttons. 
         /// </remarks>
         private void PushHistoryUrl(string? url)
@@ -162,7 +170,7 @@ namespace Timesheets.Web.Controllers
             Response.Headers.Append("HX-Push-Url", url);
         }
 
-        private static TimesheetViewModel CreateDemoTimesheet(int id, string name, string customer, string employee, DateTime periodEnds, DateTime periodStarts)
+        private static ViewTimesheetModel CreateDemoTimesheet(int id, string name, string customer, string employee, DateTime periodStarts, DateTime periodEnds)
         {
             var entries = new List<TimesheetEntryViewModel>();
 
@@ -170,13 +178,30 @@ namespace Timesheets.Web.Controllers
             {
                 for (int hour = 8; hour <= 12; hour++)
                 {
-                    entries.Add(new TimesheetEntryViewModel(0, Models.DayOfTheWeek.FromNumber(day), hour, _WorkTypes[5]));
+                    entries.Add(new TimesheetEntryViewModel(0, DayOfTheWeek.FromNumber(day), hour, _WorkTypes[5]));
                 }
             }
 
-            var ts = new TimesheetViewModel(id, name, customer, employee, periodEnds, periodStarts, entries, _WorkTypes);
+            var ts = new ViewTimesheetModel(id, name, customer, employee, periodEnds, periodStarts, entries, _WorkTypes);
 
             return ts;
+        }
+
+
+        private static Result CanCreateTimesheet(NewTimesheetModel newTimeSheet)
+        {
+            return Result.Success();
+        }
+
+        private static ViewTimesheetModel CreateTimesheet(string name, string customer, string employee, string periodEnds, string periodStarts)
+        {
+            var nextId = _Timesheets.Keys.Last() + 1;
+
+            var timesheet =  CreateDemoTimesheet(nextId, name, customer, employee, DateTime.Parse(periodEnds), DateTime.Parse(periodStarts));
+
+            _Timesheets.Add(nextId, timesheet);
+
+            return timesheet;
         }
     }
 }
