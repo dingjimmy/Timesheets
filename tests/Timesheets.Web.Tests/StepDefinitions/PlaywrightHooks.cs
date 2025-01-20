@@ -28,7 +28,8 @@ public class PlaywrightHooks
         featureContext["Playwright"] = playwright;
 
         // setup browser
-        var browser = await playwright[browserName].LaunchAsync();
+        var options = PlaywrightSettingsProvider.LaunchOptions;
+        var browser = await playwright[browserName].LaunchAsync(options);
         featureContext["Browser"] = browser;
     }
 
