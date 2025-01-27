@@ -9,6 +9,9 @@ serves as a playground for experimenting with new software engineering tools, te
 - [Bootstrap](https://getbootstrap.com)
 - [Entity Framework Core](https://learn.microsoft.com/en-gb/ef/core)
 - [Sonar Cloud](https://www.sonarsource.com/products/sonarcloud)
+- [XUnit](https://xunit.net)
+- [Reqnroll](https://reqnroll.net/)
+- [Playwright for .NET](https://playwright.dev/dotnet/)
 
 ## Getting Started
 
@@ -26,7 +29,21 @@ serves as a playground for experimenting with new software engineering tools, te
    ```pwsh
    dotnet build
    ```
-3. Run the startup project
+### Host the site locally
+1. From the command line, run the following...
    ```pwsh
-   dotnet run --project src\Timesheets.Web
+   dotnet run --project src/Timesheets.Web
+   ```
+2. Alternativly, the site should run from all good .NET IDE's (i.e. Visual Studio and Rider) out the box.
+### Run end-to-end tests on locally hosted site
+
+1. If you've never run [Playwright](https://playwright.dev/dotnet/) before, build the solution then run this the first time to install required browsers. [More Info...](https://playwright.dev/dotnet/docs/intro)
+   ```pwsh
+   tests/Timesheets.Web.Tests/bin/Debug/net8.0/playwright.ps1 install
+   ```
+2. Run the tests
+   ```pwsh
+   $env:ASPNETCORE_ENVIRONMENT = "Development"
+   dotnet run --project src/Timesheets.Web
+   dotnet test tests/Timesheets.Web.Tests
    ```

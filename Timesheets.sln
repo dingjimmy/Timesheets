@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheets.Data", "src\Time
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheets.Web", "src\Timesheets.Web\Timesheets.Web.csproj", "{4C03BC9F-F3A6-4062-A107-A1E737A62727}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheets.Tests", "tests\Timesheets.Tests\Timesheets.Tests.csproj", "{250F4E90-45F1-4E6F-8CA9-F5B4B5ED9E99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheets.Web.Tests", "tests\Timesheets.Web.Tests\Timesheets.Web.Tests.csproj", "{250F4E90-45F1-4E6F-8CA9-F5B4B5ED9E99}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DD143E49-616E-42DE-B81A-0064A124D025}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{58033204-FEF1-4000-8ECF-D04531D56BD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,5 +62,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CBEE6CA7-CF06-41FE-9057-4E4881407A6E} = {DD143E49-616E-42DE-B81A-0064A124D025}
+		{4C03BC9F-F3A6-4062-A107-A1E737A62727} = {DD143E49-616E-42DE-B81A-0064A124D025}
+		{250F4E90-45F1-4E6F-8CA9-F5B4B5ED9E99} = {58033204-FEF1-4000-8ECF-D04531D56BD1}
 	EndGlobalSection
 EndGlobal
