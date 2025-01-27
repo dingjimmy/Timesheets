@@ -1,4 +1,5 @@
-﻿Feature: Playwright Test Home Page
+﻿@EndToEndTest
+Feature: Playwright Test Home Page
       
     Scenario: The Home Page Title is Valid
         Given user has navigated to playwright home page
