@@ -5,7 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
-    <ContainerFamily>noble-chiseled</ContainerFamily>
+    <ContainerFamily>noble</ContainerFamily>
+    <!--<ContainerFamily>noble-chiseled</ContainerFamily>-->
   </PropertyGroup>
   
   <ItemGroup>
