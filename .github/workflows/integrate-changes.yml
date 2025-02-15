@@ -3,6 +3,8 @@ run-name: Integrate changes to '${{ github.ref_name }}' branch
 
 on:
   push:
+    branches-ignore:
+      - main
 
 jobs:
   build:
