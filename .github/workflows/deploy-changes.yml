@@ -4,11 +4,9 @@ concurrency: production
 
 on:
   workflow_dispatch:
-  pull_request:
+  push:
     branches:
       - main
-    types:
-      - closed
 
 jobs:
   publish:
@@ -31,8 +29,11 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore
         
-      - name: Calculate Image Tag
-        run: echo "ImgTag=$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
+      - name: Calculate Image Tags
+        run: echo "ImgTags=$(date +'%Y%m%d%H%M');latest" >> $GITHUB_ENV
       
       - name: Build Container Image & Publish to Registry
-        run: dotnet publish --no-restore /t:PublishContainer -p ContainerImageTag=$ImgTag -p ContainerRegistry=${{secrets.CONTAINER_REGISTRY_URL}}
+        run: dotnet publish --no-restore /t:PublishContainer -p ContainerImageTags='$ImgTags' -p ContainerRegistry=${{secrets.CONTAINER_REGISTRY_URL}}
+      
+      - name: Deploy Image to Azure WebApp
+        run: curl "${{secrets.DEPLOY_IMAGE_WEBHOOK}}"
