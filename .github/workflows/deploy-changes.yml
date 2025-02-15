@@ -28,11 +28,11 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore
         
-      - name: Calculate Image Tags
-        run: echo "ImgTags=$(date +'%Y%m%d%H%M');latest" >> $GITHUB_ENV
+      - name: Set Image Tags
+        run: echo "ContainerImageTags=$(date +'%Y%m%d%H%M');latest" >> $GITHUB_ENV
       
       - name: Publish Image to Registry
-        run: dotnet publish --no-restore /t:PublishContainer -p ContainerImageTags='$ImgTags' -p ContainerRegistry=${{secrets.CONTAINER_REGISTRY_URL}}
+        run: dotnet publish --no-restore /t:PublishContainer -p ContainerRegistry=${{secrets.CONTAINER_REGISTRY_URL}}
 
   deploy:
     environment: production
