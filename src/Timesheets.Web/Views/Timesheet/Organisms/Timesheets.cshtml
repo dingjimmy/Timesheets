@@ -1,4 +1,5 @@
-﻿@using Timesheets.Web.Models.Timesheet.Organisms
+﻿@using Microsoft.EntityFrameworkCore.Infrastructure
+@using Timesheets.Web.Models.Timesheet.Organisms
 @model IEnumerable<ViewTimesheetModel>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -12,7 +13,16 @@
             </div>
         </div>
         <div class="col-9">
-            <div id="timesheet-detail"></div>
+            <div id="timesheet-detail">
+                @* @if (Model.IsNew) 
+                @* { 
+                @* <partial name="Organisms/NewTimesheet" /> 
+                @* } 
+                @* @else if (Model.SelectedTimesheet.ID > 0) 
+                @* { 
+                @* <partial name="Organisms/ViewTimesheet" model="Model.SelectedTimesheet" /> 
+                @* } *@
+            </div>
         </div>
     </div>
 </div>

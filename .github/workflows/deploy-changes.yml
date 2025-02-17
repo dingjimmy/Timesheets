@@ -14,10 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: $${{ secrets.AZURE_CREDENTIALS }}
       - name: Login to container registry
         run: docker login -u ${{secrets.CONTAINER_REGISTRY_USERNAME}} -p ${{secrets.CONTAINER_REGISTRY_PASSWORD}} ${{secrets.CONTAINER_REGISTRY_URL}}
       
@@ -44,6 +40,11 @@ jobs:
     needs: publish
     
     steps:
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
       - name: Deploy Image to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
