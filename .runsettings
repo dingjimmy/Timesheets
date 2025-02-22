@@ -1,0 +1,8 @@
+﻿ <RunSettings>
+   <RunConfiguration>
+       <EnvironmentVariables>
+           <BASE_URL>https://localhost:7133</BASE_URL>
+           <ASPNETCORE_ENVIRONMENT>Development</ASPNETCORE_ENVIRONMENT>
+       </EnvironmentVariables>
+   </RunConfiguration>
+ </RunSettings>
