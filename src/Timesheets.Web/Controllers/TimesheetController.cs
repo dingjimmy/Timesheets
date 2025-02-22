@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Timesheets.Domain;
+using Timesheets.Web.Models.Shared;
 using Timesheets.Web.Models.Timesheet.Organisms;
 using NewTimesheetModel = Timesheets.Web.Models.Timesheet.Organisms.NewTimesheetModel;
 
@@ -143,6 +145,14 @@ namespace Timesheets.Web.Controllers
                 //TODO: log error
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            ViewData["Header"] = new HeaderViewModel();
+            ViewData["Footer"] = new FooterViewModel();
+            
+            base.OnActionExecuting(context);
         }
 
         /// <summary>

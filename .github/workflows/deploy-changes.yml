@@ -16,21 +16,27 @@ jobs:
     steps:
       - name: Login to container registry
         run: docker login -u ${{secrets.CONTAINER_REGISTRY_USERNAME}} -p ${{secrets.CONTAINER_REGISTRY_PASSWORD}} ${{secrets.CONTAINER_REGISTRY_URL}}
-      
+
       - name: Checkout Code
         uses: actions/checkout@v4
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      
+
       - name: Restore Dependencies
         run: dotnet restore
-        
+
+      - name: Calculate Deployment Number
+        run: echo "DeploymentNumber=$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
+
+      - name: Set Deployment Number
+        run: echo "Version=1.0.0+$DeploymentNumber" >> $GITHUB_ENV
+
       - name: Set Image Tags
-        run: echo "ContainerImageTags=$(date +'%Y%m%d%H%M');latest" >> $GITHUB_ENV
-      
+        run: echo "ContainerImageTags=$DeploymentNumber;latest" >> $GITHUB_ENV
+
       - name: Publish Image to Registry
         run: dotnet publish --no-restore /t:PublishContainer -p ContainerRegistry=${{secrets.CONTAINER_REGISTRY_URL}}
 
@@ -38,19 +44,19 @@ jobs:
     environment: production
     runs-on: ubuntu-latest
     needs: publish
-    
+
     steps:
       - name: Login to Azure
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
+
       - name: Deploy Image to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
           app-name: timesheets-webapp
-          images: ${{secrets.CONTAINER_REGISTRY_URL}}/timesheets-web:latest
-          
+          images: ${{secrets.CONTAINER_REGISTRY_URL}}/timesheets-web:latest 
+
   verify:
     environment: production
     runs-on: ubuntu-latest
@@ -59,17 +65,20 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-        
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-          
+
       - name: Restore Dependencies
         run: dotnet restore
-        
+
       - name: Build
         run: dotnet build --no-restore
-        
-      - name: End to End Tests
-        run: dotnet test --no-build --verbosity normal --filter "TestCategory=EndToEndTest" --logger html --logger trx
+
+      - name: Set website URL
+        run: echo "BASE_URL=${{secrets.PUBLIC_WEBSITE_URL}}" >> $GITHUB_ENV
+
+      - name: Run Deployment Verification Tests against website
+        run: dotnet test --no-build --verbosity normal --filter "TestCategory=DeploymentVerification" --logger html --logger trx

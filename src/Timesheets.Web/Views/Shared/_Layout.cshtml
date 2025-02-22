@@ -10,13 +10,13 @@
 </head>
 <body class="d-flex flex-column h-100">
     <header id="site-header">
-        <partial name="_Header" />
+        <partial name="_Header" model="@ViewData["Header"]" />
     </header>
     <div id="site-body" class="flex-grow-1">
         @RenderBody()
     </div>
     <footer id="site-footer">
-        <partial name="_Footer" />
+        <partial name="_Footer" model="@ViewData["Footer"]" />
     </footer>
 </body>
 </html>

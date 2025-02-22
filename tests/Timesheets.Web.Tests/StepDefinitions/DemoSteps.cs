@@ -5,7 +5,7 @@ using Reqnroll;
 namespace Timesheets.Tests.StepDefinitions;
 
 [Binding]
-public class Demo(IPage page) : PlaywrightStepDefinitions(page)
+public class DemoSteps(IPage page) : PlaywrightStepDefinitions(page)
 {
     [Given("user has navigated to playwright home page")]
     public async Task GivenUserHasNavigatedToPlaywrightHomePage()
