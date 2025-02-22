@@ -1,8 +1,14 @@
-﻿<div class="container">
+﻿@using Timesheets.Web.Models.Shared
+@model FooterViewModel
+
+<div class="container">
     <div class="row p-4">
         <div class="col-3"></div>
         <div class="col-6">
-            <p class="text-secondary text-center">© @DateTime.Now.Year - Timesheets</p>
+            <p class="text-secondary text-center">
+                <span>© @Model.DeploymentYear Timesheets</span> - 
+                <span>Deployment @Model.DeploymentNumber</span>
+            </p>
         </div>
         <div class="col-3"></div>
     </div>

@@ -19,7 +19,7 @@ public class SmokeTestSteps(IPage page): PlaywrightStepDefinitions(page)
     [Then("the copyright notice is displayed")]
     public async Task ThenTheCopyrightNoticeIsDisplayed()
     {
-        var copyrightNotice = $"\u00a9 {DateTime.Now.Year} - Timesheets";
+        var copyrightNotice = $"\u00a9 {DateTime.Now.Year} Timesheets";
         
         await Expect(Page.GetByText(copyrightNotice))
             .ToHaveCountAsync(1);
@@ -31,7 +31,7 @@ public class SmokeTestSteps(IPage page): PlaywrightStepDefinitions(page)
         var fileVer = FileVersionInfo.GetVersionInfo(Assembly.GetAssembly(typeof(SmokeTestSteps))!.Location);
         var deploymentVersion = fileVer.ProductBuildPart;
 
-        await Expect(Page.GetByText($"Deployment No: {deploymentVersion}"))
+        await Expect(Page.GetByText($"Deployment {deploymentVersion}"))
             .ToHaveCountAsync(1);
     }
 }
