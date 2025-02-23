@@ -1,5 +1,5 @@
 name: Deploy Changes
-run-name: Deploy changes to production
+run-name: Deploy changes '${{env.DeploymentNumber}}' to production
 concurrency: production
 
 on:
@@ -78,7 +78,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release
         
       - name: Install Playwright
-        run: pwsh bin/Release/net8.0/playwright.ps1 install --with-deps
+        run: pwsh tests/Timesheets.Web.Test/bin/Release/net8.0/playwright.ps1 install --with-deps
 
       - name: Set website URL
         run: echo "BASE_URL=${{secrets.PUBLIC_WEBSITE_URL}}" >> $GITHUB_ENV
