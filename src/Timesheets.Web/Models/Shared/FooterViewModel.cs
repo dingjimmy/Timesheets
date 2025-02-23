@@ -5,12 +5,23 @@ namespace Timesheets.Web.Models.Shared;
 
 public class FooterViewModel
 {
-    public string DeploymentYear { get; }
-    public string? DeploymentNumber { get; }
+    public string CurrentYear => SiteInfo.CurrentYear;
+    public string BuildNumber => SiteInfo.BuildNumber;
 
-    public FooterViewModel()
+}
+
+public static class SiteInfo
+{
+    public static string CurrentYear { get; }
+    public static string BuildNumber { get; }
+
+    static SiteInfo()
     {
-        DeploymentYear = DateTime.Now.Year.ToString();
-        DeploymentNumber = FileVersionInfo.GetVersionInfo(Assembly.GetAssembly(typeof(FooterViewModel))!.Location).ProductBuildPart.ToString();
-    }
+        CurrentYear = DateTime.Now.Year.ToString();
+
+        var version = FileVersionInfo
+            .GetVersionInfo(typeof(FooterViewModel).Assembly!.Location)
+            .ProductVersion ?? "1.0.0+197001010000";
+        BuildNumber = version.Split('+', StringSplitOptions.TrimEntries)[1];
+    }  
 }

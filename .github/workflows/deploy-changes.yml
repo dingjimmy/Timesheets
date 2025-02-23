@@ -81,4 +81,4 @@ jobs:
         run: echo "BASE_URL=${{secrets.PUBLIC_WEBSITE_URL}}" >> $GITHUB_ENV
 
       - name: Run Deployment Verification Tests against website
-        run: dotnet test --no-build --verbosity normal --filter "TestCategory=DeploymentVerification" --logger html --logger trx
+        run: dotnet test --no-build --verbosity normal --filter "Category=DeploymentVerification" --logger html --logger trx
