@@ -7,4 +7,4 @@ Feature: Verify Deployment was successfull (i.e smoke test)
     
     Scenario: The expected build has been deployed
         Given user has navigated to the Timesheets home page
-        Then the correct deployment number is displayed
+        Then the correct build number is displayed

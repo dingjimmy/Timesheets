@@ -25,13 +25,15 @@ public class SmokeTestSteps(IPage page): PlaywrightStepDefinitions(page)
             .ToHaveCountAsync(1);
     }
 
-    [Then("the correct deployment number is displayed")]
-    public async Task ThenTheCorrectDeploymentVersionIsDisplayed()
+    [Then("the correct build number is displayed")]
+    public async Task ThenTheCorrectBuildNumberIsDisplayed()
     {
-        var fileVer = FileVersionInfo.GetVersionInfo(Assembly.GetAssembly(typeof(SmokeTestSteps))!.Location);
-        var deploymentVersion = fileVer.ProductBuildPart;
+        var version = FileVersionInfo
+            .GetVersionInfo(Assembly.GetAssembly(typeof(SmokeTestSteps))!.Location)
+            .ProductVersion;
+        var buildNumber = version?.Split('+', StringSplitOptions.TrimEntries)[1];
 
-        await Expect(Page.GetByText($"Deployment {deploymentVersion}"))
+        await Expect(Page.GetByText($"Build {buildNumber}"))
             .ToHaveCountAsync(1);
     }
 }

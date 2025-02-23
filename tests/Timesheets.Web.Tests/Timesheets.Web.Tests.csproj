@@ -8,6 +8,7 @@
     <IsTestProject>true</IsTestProject>
     <RootNamespace>Timesheets.Tests</RootNamespace>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Version Condition="'$(Configuration)'=='Debug'">1.0.0+197001010000</Version>
   </PropertyGroup>
 
   <ItemGroup>
