@@ -1,5 +1,5 @@
 name: Deploy Changes
-run-name: Deploy changes '${{env.DeploymentNumber}}' to production
+run-name: Deploy changes to production
 concurrency: production
 
 on:
